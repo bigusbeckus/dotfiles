@@ -28,6 +28,15 @@ fi
 # Install deno
 curl -fsSL https://deno.land/x/install/install.sh | sh
 
+# Install neovim
+mkdir __temp
+cd __temp
+git clone https://github.com/neovim/neovim.git
+# cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+cd neovim && make CMAKE_BUILD_TYPE=Release
+# git checkout stable
+sudo make install
+
 # ===========================================
 
 # Install treesitter

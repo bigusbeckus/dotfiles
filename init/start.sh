@@ -31,9 +31,6 @@ $admininstallcmd \
   curl \
   zsh \
   htop \
-  gcc \
-  g++ \
-  make \
   libtool \
   ninja-build \
   gettext \
@@ -41,9 +38,7 @@ $admininstallcmd \
   autoconf \
   automake \
   cmake \
-  pkg-config \
   unzip \
-  doxygen \
   python3 \
   python3-venv \
   file \
@@ -62,3 +57,5 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # Set zsh as the default shell
 chsh -s /bin/zsh
+
+./install_packages.sh

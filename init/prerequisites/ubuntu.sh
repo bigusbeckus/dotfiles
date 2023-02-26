@@ -1,3 +1,9 @@
 #!/bin/sh
 
-sudo apt install build-essential procps
+sudo apt install \
+	build-essential \
+	doxygen \
+	g++ \
+	libtool-bin \
+	pkg-config \
+	procps
