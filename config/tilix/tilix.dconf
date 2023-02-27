@@ -1,0 +1,46 @@
+[/]
+background-image-mode='scale'
+prompt-on-close=true
+prompt-on-delete-profile=true
+quake-specific-monitor=0
+recent-session-files=['/home/orbit/orbit_2.json', '/home/orbit/orbit_2_scripts.json', '/home/orbit/orbit_container_scripts.json', '/home/orbit/orbit_3.json', '/home/orbit/kino_migrate.json', '/home/orbit/orbit_3_alt.json', '/home/orbit/freelance.json', '/home/orbit/orbit_3_scripts.json', '/home/orbit/rank_migrate.json', '/home/orbit/rank_migrate_alt.json', '/home/orbit/orbit_2_alt.json', '/home/beck/orbit_2.json', '/home/beck/orbit_3_alt.json', '/home/beck/orbit_2_alt.json', '/home/beck/orbit_3.json', '/home/beck/sss.json', '/home/beck/contacts.json', '/home/beck/crowdfunding.json', '/home/beck/Documents/Config/Terminal Layouts/contacts-backend.json']
+terminal-title-style='none'
+theme-variant='dark'
+window-style='borderless'
+
+[keybindings]
+app-new-session='<Shift><Alt>n'
+session-add-down='<Shift><Alt>Down'
+session-add-right='<Shift><Alt>Right'
+session-resize-terminal-down='disabled'
+session-resize-terminal-left='disabled'
+session-resize-terminal-right='disabled'
+session-resize-terminal-up='disabled'
+session-save='disabled'
+session-save-as='<Primary><Shift>s'
+terminal-maximize='<Shift><Alt>Return'
+
+[profiles]
+default='07596f62-d9af-4968-843a-b0daf53251fd'
+list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', '07596f62-d9af-4968-843a-b0daf53251fd']
+
+[profiles/07596f62-d9af-4968-843a-b0daf53251fd]
+background-color='#0C0C0D0D1818'
+background-transparency-percent=10
+backspace-binding='ascii-delete'
+default-size-columns=120
+default-size-rows=48
+dim-transparency-percent=0
+foreground-color='#EEEEEEEEECEC'
+login-shell=true
+palette=['#2E2E34343636', '#CCCC00000000', '#4E4E9A9A0606', '#C4C4A0A00000', '#34346565A4A4', '#757550507B7B', '#060698209A9A', '#D3D3D7D7CFCF', '#555557575353', '#EFEF29292929', '#8A8AE2E23434', '#FCFCE9E94F4F', '#72729F9FCFCF', '#ADAD7F7FA8A8', '#3434E2E2E2E2', '#EEEEEEEEECEC']
+scroll-on-output=false
+scrollback-lines=8192
+scrollback-unlimited=false
+terminal-bell='none'
+use-theme-colors=false
+visible-name='Transparent'
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+login-shell=true
+visible-name='Default'
