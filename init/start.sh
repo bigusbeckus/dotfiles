@@ -59,3 +59,4 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 chsh -s /bin/zsh
 
 ./install_packages.sh
+../config/apply.sh -y
