@@ -53,9 +53,7 @@ elif [ "${os,,}" = "fedora" ]; then
 fi
 
 # Unattended install for oh-my-zsh
-# https://github.com/ohmyzsh/ohmyzsh/issues/5873#issuecomment-434876855
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Set zsh as the default shell
 chsh -s /bin/zsh
