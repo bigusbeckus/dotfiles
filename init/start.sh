@@ -55,6 +55,9 @@ fi
 # Unattended install for oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+# Set my minibash theme
+sed -Ei 's/ZSH_THEME=".+"/ZSH_THEME="minibash"/g' ~/.zshrc
+
 # Set zsh as the default shell
 chsh -s /bin/zsh
 
