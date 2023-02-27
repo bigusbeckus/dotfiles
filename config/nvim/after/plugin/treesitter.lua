@@ -62,4 +62,27 @@ require("nvim-treesitter.configs").setup({
 		additional_vim_regex_highlighting = false,
 	},
 	sync_install = false,
+	textobjects = {
+		select = {
+			enable = true,
+			lookahead = true, -- Automatically jump forward to text object, similar to targets.vim
+			keymaps = {
+				-- You can use the capture groups defined in textobjects.scm
+				["af"] = { query = "@function.outer", desc = "Select function" },
+				["if"] = { query = "@function.inner", desc = "Select inner part of a function region" },
+				["ac"] = { query = "@class.outer", desc = "Select class" },
+				["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+			},
+		},
+	},
 })
+
+-- Indent textobject
+-- Select context-aware indent
+vim.keymap.set({ "x", "o" }, "ai", "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_outer()<CR>")
+-- Ensure selecting entire line (or just use Vai)
+vim.keymap.set({ "x", "o" }, "aI", "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_outer(true)<CR>")
+-- Select inner block (only if block, only else block, etc.)
+vim.keymap.set({ "x", "o" }, "ii", "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_inner()<CR>")
+-- Select entire inner range (including if, else, etc.)
+vim.keymap.set({ "x", "o" }, "iI", "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_inner(true)<CR>")

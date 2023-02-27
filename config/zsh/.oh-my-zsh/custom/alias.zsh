@@ -1,3 +1,6 @@
+# Questionable life decisions
+# alias fuckyou='git push --force'
+
 # Quality of life
 alias mkd='f(){ mkdir "$1" && cd "$1" }; f'
 
