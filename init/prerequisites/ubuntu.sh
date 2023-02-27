@@ -1,9 +1,13 @@
 #!/bin/sh
 
+# Install ubuntu-specific packages
+
 sudo apt install \
 	build-essential \
 	doxygen \
 	g++ \
 	libtool-bin \
 	pkg-config \
-	procps
+	procps \
+	python3-venv \
+	-y

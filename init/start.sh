@@ -25,25 +25,25 @@ echo "  Upgrade command (Admin): " $adminupgradecmd
 echo "Upgrading packages"
 eval "$adminupgradecmd -y"
 
-# Install some stuff
-eval "
-$admininstallcmd \
+# Install common utils and programs
+eval "$admininstallcmd \
   curl \
   zsh \
   htop \
+  python3 \
+  -y"
+
+# Install build tools
+eval "$admininstallcmd \
   libtool \
   ninja-build \
   gettext \
-  libtool-bin \
   autoconf \
   automake \
   cmake \
   unzip \
-  python3 \
-  python3-venv \
   file \
--y
-"
+  -y"
 
 # Install homebrew prerequisite packages
 if [ "${os,,}" = "ubuntu" ]; then
@@ -52,8 +52,10 @@ elif [ "${os,,}" = "fedora" ]; then
 	./prerequisites/fedora.sh
 fi
 
-# Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Unattended install for oh-my-zsh
+# https://github.com/ohmyzsh/ohmyzsh/issues/5873#issuecomment-434876855
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Set zsh as the default shell
 chsh -s /bin/zsh

@@ -1,10 +1,14 @@
 #!/bin/sh
 
-sudo yum groupinstall 'Development Tools'
-sudo yum install \
+# Install fedora specific packages
+
+sudo dnf groupinstall 'Development Tools' -y
+sudo dnf install \
 	gcc \
 	gcc-c++ \
 	make \
 	patch \
 	pkgconfig \
-	procps-ng
+	procps-ng \
+	python3-virtualenv \
+	-y
