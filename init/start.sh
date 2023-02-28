@@ -39,14 +39,18 @@ eval "$admininstallcmd \
 
 # Install build tools
 eval "$admininstallcmd \
+  gcc \
   libtool \
   ninja-build \
   gettext \
   autoconf \
   automake \
+	make \
   cmake \
   unzip \
   file \
+  mercurial \
+  bison \
   -y"
 
 # Install homebrew prerequisite packages

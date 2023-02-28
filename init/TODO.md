@@ -1,5 +1,5 @@
 # Todo
-- [ ] Install `go`
+- [x] Install `go`
 - [ ] Fix neovim mason "Package eslint_d not found" error
 - [ ] Fix neovim config so it doesn't need me to run `PackerSync` like 5 times to work right
 - [x] Install `sqlformat`

@@ -4,11 +4,10 @@
 
 sudo dnf groupinstall 'Development Tools' -y
 sudo dnf install \
-	gcc \
 	gcc-c++ \
-	make \
 	patch \
 	pkgconfig \
 	procps-ng \
 	python3-virtualenv \
+	glibc-devel \
 	-y

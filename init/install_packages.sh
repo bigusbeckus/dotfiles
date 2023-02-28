@@ -43,7 +43,7 @@ else
 	echo "export NVM_DIR=\"\$HOME/.nvm\"" >>~/.bashrc
 	echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \\. \"\$NVM_DIR/nvm.sh\"                   # This loads nvm" >>~/.bashrc
 	echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \\. \"\$NVM_DIR/bash_completion\" # This loads nvm bash_completion" >>~/.bashrc
-  echo "Done"
+	echo "Done"
 fi
 
 # Install deno and add it to PATH
@@ -92,3 +92,13 @@ nvm install --lts
 npm install -g npm@latest
 npm install -g pnpm
 npm install -g yarn
+
+# Install gvm (Go Version Manager)
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+# Install golang (must install v1.4 first because v1.5+ replaced the C compiler with a Go compiler)
+# https://github.com/moovweb/gvm#a-note-on-compiling-go-15
+gvm install go1.4
+gvm use go1.4
+# [TEST] Install latest version of golang
+gvm install latest
+gvm use latest

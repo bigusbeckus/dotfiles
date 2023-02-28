@@ -10,4 +10,5 @@ sudo apt install \
 	pkg-config \
 	procps \
 	python3-venv \
+	binutils \
 	-y
