@@ -54,6 +54,9 @@ echo "# Deno" >>~/.bashrc
 echo "export DENO_INSTALL=$HOME/.deno" >>~/.bashrc
 echo "export PATH=\$HOME/.deno/bin:\$PATH" >>~/.bashrc
 
+# Re-source bashrc
+source ~/.bashrc
+
 # Install neovim
 mkdir __temp
 cd __temp
@@ -62,6 +65,7 @@ git clone https://github.com/neovim/neovim.git
 cd neovim && make CMAKE_BUILD_TYPE=Release
 # git checkout stable
 sudo make install
+cd ..
 rm -rf __temp
 
 # Install packer.nvim (package manager)
@@ -70,7 +74,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvi
 # ===========================================
 
 # Install treesitter
-cargo install tree-sitter tree-sitter-cli
+cargo install tree-sitter-cli
 
 # Install fd, ripgrep, and fzf from homebrew
 brew install fd ripgrep fzf -y
