@@ -65,4 +65,4 @@ sed -Ei 's/# (export PATH=.+\:\$PATH)/\1/g' ./.zshrc
 ../config/apply.sh -y
 
 # Set zsh as the default shell
-chsh -s /bin/zsh
+chsh -s /usr/bin/zsh
