@@ -26,7 +26,7 @@ else
 	# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 	# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-  echo "Automatically adding nvm to path"
+	echo "Automatically adding nvm to path"
 	# zsh
 	echo "# Add nvm to PATH" >>~/.zshrc
 	echo "export NVM_DIR=\"\$HOME/.nvm\"" >>~/.zshrc
@@ -59,6 +59,9 @@ cd neovim && make CMAKE_BUILD_TYPE=Release
 # git checkout stable
 sudo make install
 rm -rf __temp
+
+# Install packer.nvim (package manager)
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # ===========================================
 
