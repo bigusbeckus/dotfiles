@@ -58,8 +58,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Set my minibash theme
 sed -Ei 's/ZSH_THEME=".+"/ZSH_THEME="minibash"/g' ~/.zshrc
 
-# Set zsh as the default shell
-chsh -s /bin/zsh
+# Uncomment ZSH path export
+sed -Ei 's/# (export PATH=.+\:\$PATH)/\1/g' ./.zshrc
 
 ./install_packages.sh
 ../config/apply.sh -y
+
+# Set zsh as the default shell
+chsh -s /bin/zsh
