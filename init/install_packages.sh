@@ -57,16 +57,19 @@ echo "export PATH=\$HOME/.deno/bin:\$PATH" >>~/.bashrc
 # Re-source bashrc
 source ~/.bashrc
 
-# Install neovim
-mkdir __temp
-cd __temp
-git clone https://github.com/neovim/neovim.git
-# cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-cd neovim && make CMAKE_BUILD_TYPE=Release
-# git checkout stable
-sudo make install
-cd ..
-rm -rf __temp
+# Install neovim (build from source)
+# mkdir __temp
+# cd __temp
+# git clone https://github.com/neovim/neovim.git
+# # cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+# cd neovim && make CMAKE_BUILD_TYPE=Release
+# # git checkout stable
+# sudo make install
+# cd ..
+# rm -rf __temp
+
+# Install neovim from homebrew because build from source is being a bitch and I just can't rn
+brew install neovim
 
 # Install packer.nvim (package manager)
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
