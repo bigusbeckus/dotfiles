@@ -65,8 +65,8 @@ cd ../config
 # Set zsh as the default shell
 chsh -s /usr/bin/zsh
 
+# Uncomment ZSH path export
+sed -Ei 's/# (export PATH=.+\:\$PATH)/\1/g' ~/.zshrc
+
 # Set my minibash theme
 sed -Ei 's/ZSH_THEME=".+"/ZSH_THEME="minibash"/g' ~/.zshrc
-
-# Uncomment ZSH path export
-sed -Ei 's/# (export PATH=.+\:\$PATH)/\1/g' ./.zshrc

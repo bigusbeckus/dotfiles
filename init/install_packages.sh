@@ -77,7 +77,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvi
 cargo install tree-sitter-cli
 
 # Install fd, ripgrep, and fzf from homebrew
-brew install fd ripgrep fzf -y
+brew install fd ripgrep fzf
 
 # Install node, yarn, and pnpm
 nvm install --lts
