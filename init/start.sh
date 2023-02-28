@@ -58,9 +58,6 @@ fi
 # Unattended install for oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-# Set my minibash theme
-sed -Ei 's/ZSH_THEME=".+"/ZSH_THEME="minibash"/g' ~/.zshrc
-
 # Uncomment ZSH path export
 sed -Ei 's/# (export PATH=.+\:\$PATH)/\1/g' ./.zshrc
 
@@ -69,3 +66,6 @@ sed -Ei 's/# (export PATH=.+\:\$PATH)/\1/g' ./.zshrc
 
 # Set zsh as the default shell
 chsh -s /usr/bin/zsh
+
+# Set my minibash theme
+sed -Ei 's/ZSH_THEME=".+"/ZSH_THEME="minibash"/g' ~/.zshrc

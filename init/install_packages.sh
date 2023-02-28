@@ -25,13 +25,15 @@ else
 	# Add nvm to path
 	# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 	# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+  echo "Automatically adding nvm to path"
 	# zsh
-	echo "# Add nvm to PATH"
+	echo "# Add nvm to PATH" >>~/.zshrc
 	echo "export NVM_DIR=\"\$HOME/.nvm\"" >>~/.zshrc
 	echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \\. \"\$NVM_DIR/nvm.sh\"                   # This loads nvm" >>~/.zshrc
 	echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \\. \"\$NVM_DIR/bash_completion\" # This loads nvm bash_completion" >>~/.zshrc
 	# bash
-	echo "# Add nvm to PATH"
+	echo "# Add nvm to PATH" >>~/.bashrc
 	echo "export NVM_DIR=\"\$HOME/.nvm\"" >>~/.bashrc
 	echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \\. \"\$NVM_DIR/nvm.sh\"                   # This loads nvm" >>~/.bashrc
 	echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \\. \"\$NVM_DIR/bash_completion\" # This loads nvm bash_completion" >>~/.bashrc
