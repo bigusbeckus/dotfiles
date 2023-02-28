@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# ChatGPT told me to do this
+sudo -v
+
 source distro.sh
 
 # Get operating system
