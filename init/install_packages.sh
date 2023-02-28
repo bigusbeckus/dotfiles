@@ -9,12 +9,16 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Add homebrew to path
-test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.bash_profile
-echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.profile
-echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.bash_profile
-echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.zsh_profile
+sed -Ei 's/(export PATH=.+)\:\$PATH/\1\:\/home\/linuxbrew\/.linuxbrew\/bin:\$PATH/g' ~/.zshrc
+
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+# test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.bash_profile
+# echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.profile
+# echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.bash_profile
+# echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.zsh_profile
 
 # Install node version manager (nvm)
 if ! get_nvm_latest nvmlatest; then
@@ -47,7 +51,7 @@ curl -fsSL https://deno.land/x/install/install.sh | sh
 echo "" >>~/.zshrc
 echo "# Deno" >>~/.zshrc
 echo "export DENO_INSTALL=$HOME/.deno" >>~/.zshrc
-sed -Ei 's/PATH=(.+):$PATH/\1:$HOME/.deno/bin:$PATH/g' ~/.zshrc
+sed -Ei 's/(export PATH=.+)\:\$PATH/\1\:\$HOME\/\.deno\/bin\:\$PATH/g' ~/.zshrc
 # bash
 echo "" >>~/.bashrc
 echo "# Deno" >>~/.bashrc
