@@ -59,6 +59,9 @@ echo "# Deno" >>~/.bashrc
 echo "export DENO_INSTALL=$HOME/.deno" >>~/.bashrc
 echo "export PATH=\$HOME/.deno/bin:\$PATH" >>~/.bashrc
 
+# Install gvm (Go Version Manager)
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+
 # Re-source bashrc
 source ~/.bashrc
 
@@ -93,12 +96,14 @@ npm install -g npm@latest
 npm install -g pnpm
 npm install -g yarn
 
-# Install gvm (Go Version Manager)
-bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 # Install golang (must install v1.4 first because v1.5+ replaced the C compiler with a Go compiler)
 # https://github.com/moovweb/gvm#a-note-on-compiling-go-15
-gvm install go1.4
+gvm install go1.4 -B
 gvm use go1.4
 # [TEST] Install latest version of golang
-gvm install latest
-gvm use latest
+if ! get_go_latest golatest; then
+	echo "Go latest version installation failed"
+else
+	gvm install "$golatest"
+	gvm use "$golatest"
+fi
