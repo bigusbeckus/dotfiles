@@ -34,6 +34,7 @@ eval "$admininstallcmd \
   zsh \
   htop \
   python3 \
+  python3-sqlparse \
   -y"
 
 # Install build tools
