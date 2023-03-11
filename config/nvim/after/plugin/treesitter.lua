@@ -68,7 +68,7 @@ require("nvim-treesitter.configs").setup({
 			lookahead = true, -- Automatically jump forward to text object, similar to targets.vim
 			keymaps = {
 				-- You can use the capture groups defined in textobjects.scm or builtins from the link below
-				-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
+				-- Source: https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
 				["af"] = { query = "@function.outer", desc = "Select function" },
 				["if"] = { query = "@function.inner", desc = "Select inner part of a function region" },
 				["ac"] = { query = "@class.outer", desc = "Select class" },
