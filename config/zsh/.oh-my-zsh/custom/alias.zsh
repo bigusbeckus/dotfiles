@@ -24,6 +24,7 @@ alias c="code"
 alias c.="code ."
 alias n="nvim"
 alias n.="nvim ."
+alias t="tmux"
 alias vim="nvim"
 alias vimbegood="docker run -it --rm brandoncc/vim-be-good:latest"
 

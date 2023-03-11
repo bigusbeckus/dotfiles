@@ -28,6 +28,7 @@ list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', '07596f62-d9af-4968-843a-b0daf5325
 background-color='#0C0C0D0D1818'
 background-transparency-percent=10
 backspace-binding='ascii-delete'
+cursor-shape='underline'
 default-size-columns=120
 default-size-rows=48
 dim-transparency-percent=0

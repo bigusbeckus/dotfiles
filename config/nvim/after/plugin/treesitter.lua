@@ -67,11 +67,25 @@ require("nvim-treesitter.configs").setup({
 			enable = true,
 			lookahead = true, -- Automatically jump forward to text object, similar to targets.vim
 			keymaps = {
-				-- You can use the capture groups defined in textobjects.scm
+				-- You can use the capture groups defined in textobjects.scm or builtins from the link below
+				-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
 				["af"] = { query = "@function.outer", desc = "Select function" },
 				["if"] = { query = "@function.inner", desc = "Select inner part of a function region" },
 				["ac"] = { query = "@class.outer", desc = "Select class" },
 				["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+				-- Additional
+				["aa"] = { query = "@frame.outer", desc = "Select assignment" },
+				["ia"] = { query = "@frame.inner", desc = "Select inner part of an assignment" },
+				["ab"] = { query = "@block.outer", desc = "Select block" },
+				["ib"] = { query = "@block.inner", desc = "Select inner part of a block" },
+				-- ["ac"] = { query = "@comment.outer", desc = "Select comment" },
+				-- ["ic"] = { query = "@comment.inner", desc = "Select inner part of a comment" },
+				["al"] = { query = "@loop.outer", desc = "Select loop" },
+				["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
+				["ar"] = { query = "@return.outer", desc = "Select return statement" },
+				["ir"] = { query = "@return.inner", desc = "Select inner part of a return statement" },
+				["as"] = { query = "@statement.outer", desc = "Select statement" },
+				["is"] = { query = "@statement.inner", desc = "Select inner part of a statement" },
 			},
 		},
 	},
