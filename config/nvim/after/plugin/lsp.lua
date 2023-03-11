@@ -144,7 +144,7 @@ lsp.configure("jsonls", {
 						".stylelintrc.json",
 						"stylelint.config.json",
 					},
-					url = "http://json.schemastore.org/stylelintrc.json",
+					url = "https://json.schemastore.org/stylelintrc.json",
 				},
 				{
 					description = "Turborepo config",
