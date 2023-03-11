@@ -24,6 +24,9 @@ vim.g.maplocalleader = " "
 -- Permanently enable gutters to avoid shifting with lsp-zero icons that I haven't figured out how to disable yet
 vim.opt.signcolumn = "yes"
 
+-- Get underline cursor in some mods (wohooo)
+vim.opt.guicursor = "n-v:block,i-c-ci-cr-r:ver25-hor50"
+
 -- IndentBlankline backgrounds
 vim.opt.termguicolors = true
 vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
@@ -53,4 +56,13 @@ vim.cmd([[
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
+]])
+
+-- Autocommand to move change default help windows to vertical left
+-- Source: https://vi.stackexchange.com/a/4464
+vim.cmd([[
+  augroup vertical_help
+    autocmd!
+    autocmd BufEnter *.txt if &buftype == 'help' | wincmd H | endif
+  augroup END
 ]])

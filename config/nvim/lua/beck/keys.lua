@@ -34,6 +34,6 @@ end)
 -- Netrw rebind
 -- vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
 
-vim.cmd("cabb help vert help")
-vim.cmd("cabb h vert h")
-
+-- Unbound because autocmd version is better
+-- vim.cmd("cabb help vert help")
+-- vim.cmd("cabb h vert h")
