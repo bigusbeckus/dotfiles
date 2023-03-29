@@ -3,6 +3,9 @@ return require("packer").startup(function(use)
 	-- Load packer
 	use("wbthomason/packer.nvim")
 
+	-- Neovim config helper
+	use("folke/neodev.nvim")
+
 	-- LSP config
 	use({
 		"VonHeikemen/lsp-zero.nvim",
@@ -27,6 +30,17 @@ return require("packer").startup(function(use)
 			-- Snippets
 			"L3MON4D3/LuaSnip", -- Required
 			-- "rafamadriz/friendly-snippets",
+		},
+	})
+
+	-- Configure mason
+	require("mason").setup({
+		ui = {
+			icons = {
+				package_installed = "✓",
+				package_pending = "➜",
+				package_uninstalled = "✗",
+			},
 		},
 	})
 
@@ -95,9 +109,17 @@ return require("packer").startup(function(use)
 	--  }
 
 	-- nvim-dap (Debug Adapter Protocol) and mason-nvim-dap
-	use("folke/neodev.nvim")
 	use({ "mfussenegger/nvim-dap", "jayp0521/mason-nvim-dap.nvim" })
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	-- VSCode js/ts debugger
+	-- Source: https://github.com/mxsdev/nvim-dap-vscode-js
+	use({
+		"microsoft/vscode-js-debug",
+		opt = true,
+		run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+	})
+	use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
+	use("Pocco81/DAPInstall.nvim")
 
 	-- nvim-dap UI
 	-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
@@ -159,6 +181,8 @@ return require("packer").startup(function(use)
 			require("telescope").load_extension("fzf")
 		end,
 	})
+	-- Configure telescope (not in `after` because the delay sometimes before the keybinds kicked in got annoying)
+	require("beck.telescope")
 
 	-- Fugitive
 	use({ "tpope/vim-fugitive" })
@@ -237,5 +261,11 @@ return require("packer").startup(function(use)
 				},
 			})
 		end,
+	})
+
+	-- Lua json5 parser (mainly for loading launch.json with trailing commas)
+	use({
+		"Joakker/lua-json5",
+		run = "./install.sh",
 	})
 end)

@@ -61,8 +61,39 @@ require("nvim-treesitter.configs").setup({
 		end,
 		additional_vim_regex_highlighting = false,
 	},
+	indent = {
+		enable = true,
+	},
 	sync_install = false,
 	textobjects = {
+		move = {
+			enable = true,
+			set_jumps = true,
+			goto_next_start = {
+				["]f"] = { query = "@function.outer", desc = "Next function start" },
+				["]l"] = { query = "@loop.outer", desc = "Next loop start" },
+			},
+			goto_next_end = {
+				["]F"] = { query = "@function.outer", desc = "Next function end" },
+				["]L"] = { query = "@loop.outer", desc = "Next loop end" },
+			},
+			goto_previous_start = {
+				["[f"] = { query = "@function.outer", desc = "Previous function start" },
+				["[l"] = { query = "@loop.outer", desc = "Previous loop start" },
+			},
+			goto_previous_end = {
+				["[F"] = { query = "@function.outer", desc = "Previous function end" },
+				["[L"] = { query = "@loop.outer", desc = "Previous loop end" },
+			},
+			goto_next = {
+				["]d"] = { query = "@conditional.outer", desc = "Next conditional" },
+				["]r"] = { query = "@return.outer", desc = "Next return" },
+			},
+			goto_previous = {
+				["[d"] = { query = "@conditional.outer", desc = "Previous conditional" },
+				["[r"] = { query = "@return.outer", desc = "Previous return" },
+			},
+		},
 		select = {
 			enable = true,
 			lookahead = true, -- Automatically jump forward to text object, similar to targets.vim
@@ -82,6 +113,8 @@ require("nvim-treesitter.configs").setup({
 				-- ["ic"] = { query = "@comment.inner", desc = "Select inner part of a comment" },
 				["al"] = { query = "@loop.outer", desc = "Select loop" },
 				["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
+				["ad"] = { query = "@conditional.outer", desc = "Select conditional" },
+				["id"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
 				["ar"] = { query = "@return.outer", desc = "Select return statement" },
 				["ir"] = { query = "@return.inner", desc = "Select inner part of a return statement" },
 				["as"] = { query = "@statement.outer", desc = "Select statement" },
@@ -100,3 +133,9 @@ vim.keymap.set({ "x", "o" }, "aI", "<Cmd>lua require'treesitter_indent_object.te
 vim.keymap.set({ "x", "o" }, "ii", "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_inner()<CR>")
 -- Select entire inner range (including if, else, etc.)
 vim.keymap.set({ "x", "o" }, "iI", "<Cmd>lua require'treesitter_indent_object.textobj'.select_indent_inner(true)<CR>")
+
+-- Folding
+-- Source: https://github.com/nvim-treesitter/nvim-treesitter#Folding
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldenable = false

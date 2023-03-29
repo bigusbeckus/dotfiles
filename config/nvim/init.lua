@@ -63,6 +63,11 @@ vim.cmd([[
 vim.cmd([[
   augroup vertical_help
     autocmd!
-    autocmd BufEnter *.txt if &buftype == 'help' | wincmd H | endif
+    autocmd BufEnter *.txt if &buftype == 'help' | wincmd L | endif
   augroup END
 ]])
+
+-- Neovide configs
+if vim.g.neovide then
+	require("beck.neovide")
+end

@@ -156,6 +156,11 @@ lsp.configure("jsonls", {
 					fileMatch = { "deno.json", "deno.jsonc" },
 					url = "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
 				},
+				{
+					description = "Nodemon config",
+					fileMatch = { "nodemon.json", "nodemon.jsonc" },
+					url = "https://json.schemastore.org/nodemon.json",
+				},
 			},
 		},
 	},
@@ -167,6 +172,7 @@ vim.cmd([[
     autocmd!
     autocmd BufNewFile,BufRead .eslintrc.json setlocal filetype=jsonc
     autocmd BufNewFile,BufRead jsconfig.json setlocal filetype=jsonc
+    autocmd BufNewFile,BufRead launch.json setlocal filetype=jsonc
     autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
   augroup end
 ]])
@@ -237,31 +243,86 @@ lsp.setup_nvim_cmp({
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 lsp.on_attach(function(client, bufnr)
-	local opts = { buffer = bufnr, remap = false }
+	-- local opts = { buffer = bufnr, remap = false }
 
-	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
-	vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+	vim.keymap.set(
+		"n",
+		"<leader>e",
+		vim.diagnostic.open_float,
+		{ buffer = bufnr, remap = false, desc = "[E] Show diagnostic" }
+	)
+	vim.keymap.set(
+		"n",
+		"[d",
+		vim.diagnostic.goto_prev,
+		{ buffer = bufnr, remap = false, desc = "Go to previous [D]iagnostic" }
+	)
+	vim.keymap.set(
+		"n",
+		"]d",
+		vim.diagnostic.goto_next,
+		{ buffer = bufnr, remap = false, desc = "Go to next [D]iagnostic" }
+	)
+	-- vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { buffer = bufnr, remap = false, desc = "" })
+	-- vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, { buffer = bufnr, remap = false, desc = "" })
 
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-	vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
-	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, remap = false, desc = "[G]o to [D]efinition" })
+	vim.keymap.set(
+		"n",
+		"gD",
+		vim.lsp.buf.declaration,
+		{ buffer = bufnr, remap = false, desc = "[G]o to [D]eclaration" }
+	)
+	vim.keymap.set(
+		"n",
+		"gi",
+		vim.lsp.buf.implementation,
+		{ buffer = bufnr, remap = false, desc = "[G]o to [I]mplementation" }
+	)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, remap = false, desc = "[K] Hover" })
+	vim.keymap.set(
+		"n",
+		"<leader>D",
+		vim.lsp.buf.type_definition,
+		{ buffer = bufnr, remap = false, desc = "Go to type [D]efinition" }
+	)
+	vim.keymap.set(
+		"i",
+		"<C-h>",
+		vim.lsp.buf.signature_help,
+		{ buffer = bufnr, remap = false, desc = "Signature [H]elp (Insert mode)" }
+	)
 
-	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-	vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-	vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+	vim.keymap.set(
+		"n",
+		"<C-k>",
+		vim.lsp.buf.signature_help,
+		{ buffer = bufnr, remap = false, desc = "[<C-k>] Signature help (Normal mode)" }
+	)
+	vim.keymap.set(
+		"n",
+		"<leader>wa",
+		vim.lsp.buf.add_workspace_folder,
+		{ buffer = bufnr, remap = false, desc = "[W]orkspace folders: [A]dd" }
+	)
+	vim.keymap.set(
+		"n",
+		"<leader>wr",
+		vim.lsp.buf.remove_workspace_folder,
+		{ buffer = bufnr, remap = false, desc = "[W]orkspace folders: [R]emove" }
+	)
 	vim.keymap.set("n", "<leader>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, opts)
+	end, { buffer = bufnr, remap = false, desc = "[W]orkspace folders: [L]ist" })
 
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, remap = false, desc = "[R]e [N]ame" })
+	vim.keymap.set(
+		"n",
+		"<leader>ga",
+		vim.lsp.buf.code_action,
+		{ buffer = bufnr, remap = false, desc = "[G]o to Code [A]ctions" }
+	)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, remap = false, desc = "[G]o to [R]eferences" })
 
 	-- tsserver - denols conflict resolution
 	local active_clients = vim.lsp.get_active_clients()
@@ -341,4 +402,5 @@ vim.diagnostic.config({
 -- 	underline = true,
 -- 	severity_sort = false,
 -- 	float = true,
+-- }
 -- }
