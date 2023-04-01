@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # ChatGPT told me to do this
 sudo -v
@@ -63,7 +64,10 @@ fi
 # Unattended install for oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-./install_packages.sh
+# Install packages
+./packages/install.sh
+
+# Apply configs
 cd ../config
 ./apply.sh -y
 

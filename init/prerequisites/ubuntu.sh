@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+set -euo pipefail
 
 # Install ubuntu-specific packages
-
 sudo apt install \
 	build-essential \
 	doxygen \

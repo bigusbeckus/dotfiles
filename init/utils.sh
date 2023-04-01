@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -euo pipefail
 
 function get_nvm_latest() {
   local ghreleaseurl="https://api.github.com/repos/nvm-sh/nvm/releases/latest"

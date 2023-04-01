@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+set -euo pipefail
 
 # Install fedora specific packages
-
 sudo dnf groupinstall 'Development Tools' -y
 sudo dnf install \
 	gcc-c++ \

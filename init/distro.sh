@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Detect OS (ubuntu, fedora, or arch)
 function get_os_name() {

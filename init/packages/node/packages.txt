@@ -1,0 +1,3 @@
+npm@latest
+pnpm
+yarn
