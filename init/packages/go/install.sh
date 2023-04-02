@@ -28,11 +28,12 @@ function get_go_latest() {
 }
 
 function install_latest_gvm() {
-	# Install gvm (Go Version Manager)
-	bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-
-	# Re-source bashrc
-	source ~/.bashrc
+	if ! command -v gvm &>/dev/null; then
+		# Install gvm (Go Version Manager)
+		bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+		# shellcheck source=/dev/null
+		source ~/.gvm/scripts/gvm # Source gvm
+	fi
 }
 
 function install_golang() {
@@ -45,11 +46,13 @@ function install_golang() {
 	# Install latest version of golang
 	if ! get_go_latest golatest; then
 		echo "Go latest version installation failed"
+		return 1
 	else
 		gvm install "$golatest"
 		# shellcheck source=/dev/null
 		source ~/.gvm/scripts/gvm
 		gvm use "$golatest"
+		return 0
 	fi
 }
 
