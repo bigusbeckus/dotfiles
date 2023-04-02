@@ -35,7 +35,7 @@ echo "Upgrading packages"
 echo "$password" | eval "$adminupgradecmd -y"
 
 # Install common utils and programs
-echo "$password" | eval "$admininstallcmd \
+eval "echo "$password" | $admininstallcmd \
   curl \
   zsh \
   htop \
@@ -44,7 +44,7 @@ echo "$password" | eval "$admininstallcmd \
   -y"
 
 # Install build tools
-echo "$password" | eval "$admininstallcmd \
+eval "echo "$password" | $admininstallcmd \
   gcc \
   libtool \
   ninja-build \
