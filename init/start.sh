@@ -72,7 +72,7 @@ fi
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Install packages
-./packages/install.sh
+cd packages && ./install.sh && cd ..
 
 # Apply configs
 cd ../config
