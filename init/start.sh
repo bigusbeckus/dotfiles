@@ -76,7 +76,9 @@ else
 fi
 
 # Install packages
-cd packages && ./install.sh && cd ..
+cd packages
+./install.sh
+cd ..
 
 # Apply configs
 cd ../config
