@@ -21,8 +21,15 @@ function install_neovim_brew() {
 function install_neovim() {
 	local __nviminstalltype=$1
 
-	if [ "${__nviminstalltype,,}" = "brew"]; then
+	if [ "${__nviminstalltype,,}" = "brew" ]; then
 		echo "Installing neovim from homebrew..."
+		# Run homebrew install script if it hasn't been run yet
+		if ! command -v brew &>/dev/null; then
+      echo "Installing homebrew before neovim"
+			cd ../linuxbrew
+			./install.sh
+			cd ../neovim
+		fi
 		install_neovim_brew
 	elif [ "${__nviminstalltype,,}" = "source" ]; then
 		echo "Building neovim from source"

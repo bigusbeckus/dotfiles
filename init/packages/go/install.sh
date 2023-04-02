@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euo pipefail
 
 function get_go_latest() {
 	# Version listing logic "borrowed" from gvm source
