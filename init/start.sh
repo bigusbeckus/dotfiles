@@ -69,7 +69,7 @@ elif [ "${os,,}" = "fedora" ]; then
 fi
 
 # Unattended install for oh-my-zsh
-if test -d "~/.oh-my-zsh"; then
+if [ -d "$HOME/.oh-my-zsh" ]; then
 	echo "Oh My Zsh already installed. Skipping."
 else
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
