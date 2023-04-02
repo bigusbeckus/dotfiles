@@ -26,6 +26,7 @@
 | [ ] | 22  | packer.nvim     | `git clone --depth 1 <https://github.com/wbthomason/packer.nvim> ~/.local/share/nvim/site/pack/packer/start/packer.nvim` |
 | [ ] | 23  | Nerd fonts      | Put files in a `.fonts` folder in the `$HOME` directory (Fira Code and JetBrains Mono)                                   |
 | [ ] | 24  | docker          | [Ubuntu](https://docs.docker.com/desktop/install/ubuntu/), [Fedora](https://docs.docker.com/desktop/install/fedora/)     |
+| [ ] | 25  | bun             | `curl -fsSL <https://bun.sh/install> \| bash`                                                                            |
 
 ### Notes
 
