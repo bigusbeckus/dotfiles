@@ -9,7 +9,7 @@ function install_neovim_source() {
 	# cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
 	cd neovim && make CMAKE_BUILD_TYPE=Release
 	# git checkout stable
-	sudo make install
+	echo $password | sudo -S make install
 	cd ..
 	rm -rf __temp
 }

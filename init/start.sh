@@ -1,8 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-# ChatGPT told me to do this
-sudo -v
+source auth.sh
+
+# Get superuser password
+if ! get_sudo_credentials password; then
+	echo "Sudo password required. Program will now exit"
+	exit 1
+fi
 
 source distro.sh
 
@@ -27,10 +32,10 @@ echo "  Upgrade command (Admin): " $adminupgradecmd
 
 # Run upgrade command
 echo "Upgrading packages"
-eval "$adminupgradecmd -y"
+echo "$password" | eval "$adminupgradecmd -y"
 
 # Install common utils and programs
-eval "$admininstallcmd \
+echo "$password" | eval "$admininstallcmd \
   curl \
   zsh \
   htop \
@@ -39,7 +44,7 @@ eval "$admininstallcmd \
   -y"
 
 # Install build tools
-eval "$admininstallcmd \
+echo "$password" | eval "$admininstallcmd \
   gcc \
   libtool \
   ninja-build \
@@ -56,9 +61,11 @@ eval "$admininstallcmd \
 
 # Install homebrew prerequisite packages
 if [ "${os,,}" = "ubuntu" ]; then
-	./prerequisites/ubuntu.sh
+	source prerequisites/ubuntu.sh
+	install_ubuntu_packages $password
 elif [ "${os,,}" = "fedora" ]; then
-	./prerequisites/fedora.sh
+	source prerequisites/fedora.sh
+	install_fedora_packages $password
 fi
 
 # Unattended install for oh-my-zsh
