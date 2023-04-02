@@ -25,7 +25,8 @@ function install_linuxbrew() {
 		fi
 
 		# Re-source bashrc
-		source ~/.bashrc
+		# shellcheck source=/dev/null
+		source ~/.bash_profile
 	else
 		echo "Brew already installed"
 	fi
