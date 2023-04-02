@@ -7,7 +7,17 @@ function install_bun() {
 		# Install bun
 		echo "Bun command not found, installing..."
 		curl -fsSL https://bun.sh/install | bash
-		source ~/.bashrc
+
+		# Update zshrc
+		echo "" >>~/.zshrc
+		echo "# bun completions" >>~/.zshrc
+		echo "[ -s \"\$HOME/.bun/_bun\" ] && source \"\$HOME/.bun/_bun\"" >>~/.zshrc
+
+		# bun
+		echo "" >>~/.zshrc
+		echo "export BUN_INSTALL=\"\$HOME/.bun\"" >>~/.zshrc
+		echo "export PATH=\"\$BUN_INSTALL/bin:\$PATH\"" >>~/.zshrc
+
 		echo "Done"
 	fi
 }
