@@ -15,10 +15,8 @@ function install_deno() {
 		echo "# Deno" >>~/.bashrc
 		echo "export DENO_INSTALL=$HOME/.deno" >>~/.bashrc
 		echo "export PATH=\$HOME/.deno/bin:\$PATH" >>~/.bashrc
-    
-    source ~/.bashrc
-  else
-    echo "Deno already installed"
+	else
+		echo "Deno already installed"
 	fi
 }
 
