@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+source ../utils.sh
+
 function install_linuxbrew() {
 	if ! command -v brew &>/dev/null; then
 		# Install homebrew
@@ -47,3 +49,7 @@ function install_brew_package() {
 
 	return 0
 }
+
+# Install
+install_linuxbrew
+install_packages install_brew_package
