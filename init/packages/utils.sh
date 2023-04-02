@@ -3,6 +3,7 @@ set -euo pipefail
 
 function install_packages() {
 	local __installpackage=$1
+  echo "utils.sh pwd:" "$(pwd)"
 	# Read package names from packages.txt
 	while read package; do
 		# Install package using Homebrew
