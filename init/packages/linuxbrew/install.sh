@@ -2,27 +2,31 @@
 set -euo pipefail
 
 function install_linuxbrew() {
-	# Install homebrew
-	NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	if ! command -v brew &>/dev/null; then
+		# Install homebrew
+		NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-	# Set up Homebrew for Bash
-	if [[ -r ~/.bash_profile ]]; then
-		echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bash_profile
-	fi
-	if [[ -r ~/.bashrc ]]; then
-		echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
-	fi
+		# Set up Homebrew for Bash
+		if [[ -r ~/.bash_profile ]]; then
+			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bash_profile
+		fi
+		if [[ -r ~/.bashrc ]]; then
+			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
+		fi
 
-	# Set up Homebrew for Zsh
-	if [[ -r ~/.zshrc ]]; then
-		echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
-	fi
-	if [[ -r ~/.zprofile ]]; then
-		echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zprofile
-	fi
+		# Set up Homebrew for Zsh
+		if [[ -r ~/.zshrc ]]; then
+			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
+		fi
+		if [[ -r ~/.zprofile ]]; then
+			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zprofile
+		fi
 
-	# Re-source bashrc
-	source ~/.bashrc
+		# Re-source bashrc
+		source ~/.bashrc
+	else
+		echo "Brew already installed"
+	fi
 }
 
 function install_brew_package() {

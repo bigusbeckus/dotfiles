@@ -33,26 +33,32 @@ function install_latest_gvm() {
 		bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 		# shellcheck source=/dev/null
 		source ~/.gvm/scripts/gvm # Source gvm
+	else
+		echo "Go version manager already installed"
 	fi
 }
 
 function install_golang() {
-	# Install golang (must install the v1.20 binaries first because v1.5+ replaced the C compiler with a Go compiler)
-	# https://github.com/moovweb/gvm#a-note-on-compiling-go-15
-	gvm install go1.20 -B
-	# shellcheck source=/dev/null
-	source ~/.gvm/scripts/gvm # Source gvm after install but before use so use works inside the script
-	gvm use go1.20
-	# Install latest version of golang
-	if ! get_go_latest golatest; then
-		echo "Go latest version installation failed"
-		return 1
-	else
-		gvm install "$golatest"
+	if ! command -v go &>/dev/null; then
+		# Install golang (must install the v1.20 binaries first because v1.5+ replaced the C compiler with a Go compiler)
+		# https://github.com/moovweb/gvm#a-note-on-compiling-go-15
+		gvm install go1.20 -B
 		# shellcheck source=/dev/null
-		source ~/.gvm/scripts/gvm
-		gvm use "$golatest"
-		return 0
+		source ~/.gvm/scripts/gvm # Source gvm after install but before use so use works inside the script
+		gvm use go1.20
+		# Install latest version of golang
+		if ! get_go_latest golatest; then
+			echo "Go latest version installation failed"
+			return 1
+		else
+			gvm install "$golatest"
+			# shellcheck source=/dev/null
+			source ~/.gvm/scripts/gvm
+			gvm use "$golatest"
+			return 0
+		fi
+	else
+		echo "Go already installed"
 	fi
 }
 

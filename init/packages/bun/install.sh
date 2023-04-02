@@ -19,6 +19,8 @@ function install_bun() {
 		echo "export PATH=\"\$BUN_INSTALL/bin:\$PATH\"" >>~/.zshrc
 
 		echo "Done"
+	else
+		echo "Bun already installed"
 	fi
 }
 
