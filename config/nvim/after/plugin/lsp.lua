@@ -166,6 +166,26 @@ lsp.configure("jsonls", {
 	},
 })
 
+lsp.configure("yamlls", {
+	filetypes = { "yaml", "yml" },
+	settings = {
+		yaml = {
+			schemas = {
+				{
+					description = "Docker compose",
+					fileMatch = {
+						"docker-compose.yml",
+						"docker-compose.yaml",
+						"docker-compose*.yml",
+						"docker-compose*.yaml",
+					},
+					url = "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json",
+				},
+			},
+		},
+	},
+})
+
 -- Recognize json files known to actually be JSONC
 vim.cmd([[
   augroup jsoncdetect
