@@ -6,8 +6,10 @@ alias mkd='f(){ mkdir "$1" && cd "$1" }; f'
 
 alias sd='cd "$((fd . --type d | fzf) | sed "s/^$/""/")"'
 alias sdh='cd "$((fd . --full-path ~ --type d | fzf) | sed "s/^$/""/")"'
-alias sf='xdg-open "$((fd . --type f | fzf) | sed "s/^$/""/")" &> /dev/null'
-alias sfh='xdg-open "$((fd . --full-path ~ --type f | fzf) | sed "s/^$/""/")" &> /dev/null'
+# alias sf='xdg-open "$((fd . --type f | fzf) | sed "s/^$/""/")" &> /dev/null' # No preview
+# alias sfh='xdg-open "$((fd . --full-path ~ --type f | fzf) | sed "s/^$/""/")" &> /dev/null' # No preview
+alias sf='xdg-open "$((fd . --type f | fzf --preview "cat {}" | xargs) | sed "s/^$/""/")" &> /dev/null' # With preview
+alias sfh='xdg-open "$((fd . --full-path ~ --type f | fzf --preview "cat {}" | xargs) | sed "s/^$/""/")" &> /dev/null' # With preview
 # alias sdt='cd "$((fd . --type d | fzf) | sed "s/^$/""/")"'
 
 # Kubernetes

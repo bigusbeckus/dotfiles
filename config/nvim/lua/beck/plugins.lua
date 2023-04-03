@@ -144,6 +144,7 @@ return require("packer").startup(function(use)
 			ts_update()
 		end,
 	})
+	use("nvim-treesitter/nvim-treesitter-context")
 	-- Additional text objects via treesitter (this is actually kinda insane)
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
 	-- Indents text object
