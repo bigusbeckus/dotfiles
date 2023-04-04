@@ -42,8 +42,9 @@ function install_nvm() {
 	echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \\. \"\$NVM_DIR/nvm.sh\"                   # This loads nvm" >>~/.bashrc
 	echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \\. \"\$NVM_DIR/bash_completion\" # This loads nvm bash_completion" >>~/.bashrc
 	echo "Done"
-
-	source ~/.bashrc
+	# Current shell
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 }
 
 function install_node() {
@@ -52,8 +53,6 @@ function install_node() {
 
 function install_npm_package() {
 	local package=$1
-
-	npm install -g npm@latest
 
 	# Check if package is already installed
 	if npm ls -g "$package" >/dev/null 2>&1; then
@@ -74,4 +73,5 @@ function install_npm_package() {
 # Install
 install_nvm
 install_node
+npm install -g npm@latest
 install_packages install_npm_package

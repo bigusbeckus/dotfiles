@@ -1,5 +1,5 @@
 #!/bin/bash
 set -euo pipefail
 
-# ./nvm.sh
-./volta.sh
+./nvm.sh
+# ./volta.sh
