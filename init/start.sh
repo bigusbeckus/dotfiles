@@ -9,6 +9,8 @@ if ! get_sudo_credentials password; then
 	exit 1
 fi
 
+export SUDO_PASSWORD="$password"
+
 source distro.sh
 
 # Get operating system
