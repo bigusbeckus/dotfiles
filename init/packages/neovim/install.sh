@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Build neovim from source and install
 function install_neovim_source() {
-	mkdir __temp
+	mkdir -p __temp
 	cd __temp
 	git clone https://github.com/neovim/neovim.git
 	# git checkout stable # Uncomment this line to build the stable release
