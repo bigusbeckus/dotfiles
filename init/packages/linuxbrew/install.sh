@@ -15,21 +15,20 @@ function install_linuxbrew() {
 		if [[ -r ~/.bash_profile ]]; then
 			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bash_profile
 		fi
-		if [[ -r ~/.bashrc ]]; then
-			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
-		fi
+		# if [[ -r ~/.bashrc ]]; then
+		# 	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
+		# fi
 
 		# Set up Homebrew for Zsh
-		if [[ -r ~/.zshrc ]]; then
-			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
-		fi
+		# if [[ -r ~/.zshrc ]]; then
+		# 	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
+		# fi
 		if [[ -r ~/.zprofile ]]; then
 			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zprofile
 		fi
 
-		# Re-source bashrc
-		# shellcheck source=/dev/null
-		source ~/.bash_profile
+		# Add homebrew to path for use within the script
+		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 	else
 		echo "Brew already installed"
 	fi
