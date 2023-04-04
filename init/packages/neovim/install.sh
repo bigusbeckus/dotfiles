@@ -6,11 +6,12 @@ function install_neovim_source() {
 	mkdir __temp
 	cd __temp
 	git clone https://github.com/neovim/neovim.git
-	# cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-	cd neovim && make CMAKE_BUILD_TYPE=Release
-	# git checkout stable
+	# git checkout stable # Uncomment this line to build the stable release
+	cd neovim
+	make CMAKE_BUILD_TYPE=Release
+	# make CMAKE_BUILD_TYPE=RelWithDebInfo # Replace the above line with this one to get stack traces on crash
 	echo $password | sudo -S make install
-	cd ..
+	cd ../..
 	rm -rf __temp
 }
 
@@ -25,7 +26,7 @@ function install_neovim() {
 		echo "Installing neovim from homebrew..."
 		# Run homebrew install script if it hasn't been run yet
 		if ! command -v brew &>/dev/null; then
-      echo "Installing homebrew before neovim"
+			echo "Homebrew not found. Installing homebrew before neovim..."
 			cd ../linuxbrew
 			./install.sh
 			cd ../neovim
@@ -41,4 +42,4 @@ function install_neovim() {
 }
 
 # Install
-install_neovim brew
+install_neovim "source"
