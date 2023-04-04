@@ -5,8 +5,11 @@ source ../utils.sh
 
 function install_linuxbrew() {
 	if ! command -v brew &>/dev/null; then
+		# Refresh sudo timestamp because that was causing issues
+		echo $SUDO_PASSWORD | sudo -S -v
+
 		# Install homebrew
-		echo $SUDO_PASSWORD | sudo -S -E NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+		NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 		# Set up Homebrew for Bash
 		if [[ -r ~/.bash_profile ]]; then
