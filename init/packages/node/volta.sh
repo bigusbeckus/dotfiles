@@ -15,8 +15,6 @@ function install_node() {
 function install_npm_package() {
 	local package=$1
 
-	npm install -g npm@latest
-
 	# Check if package is already installed
 	if npm ls -g "$package" >/dev/null 2>&1; then
 		echo "Package $package is already installed, skipping..."
@@ -36,4 +34,5 @@ function install_npm_package() {
 # Install
 install_volta
 install_node
+npm install -g npm@latest
 install_packages install_npm_package
