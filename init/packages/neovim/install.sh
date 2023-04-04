@@ -10,7 +10,7 @@ function install_neovim_source() {
 	cd neovim
 	make CMAKE_BUILD_TYPE=Release
 	# make CMAKE_BUILD_TYPE=RelWithDebInfo # Replace the above line with this one to get stack traces on crash
-	echo $password | sudo -S make install
+	echo $SUDO_PASSWORD | sudo -S make install
 	cd ../..
 	rm -rf __temp
 }
