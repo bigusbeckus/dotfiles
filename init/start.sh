@@ -84,7 +84,7 @@ cd ..
 
 # Apply configs
 cd ../config
-./apply.sh -y
+echo y | ./apply.sh # Fix the config script prompt to take flags instead
 
 # Set zsh as the default shell
 chsh -s /usr/bin/zsh
