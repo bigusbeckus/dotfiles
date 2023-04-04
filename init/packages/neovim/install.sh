@@ -20,21 +20,25 @@ function install_neovim_brew() {
 }
 
 function install_neovim() {
-	local __nviminstalltype=$1
+	if ! command -v nvim &>/dev/null; then
+		local __nviminstalltype=$1
 
-	if [ "${__nviminstalltype,,}" = "brew" ]; then
-		echo "Installing neovim from homebrew..."
-		# Run homebrew install script if it hasn't been run yet
-		if ! command -v brew &>/dev/null; then
-			echo "Homebrew not found. Installing homebrew before neovim..."
-			cd ../linuxbrew
-			./install.sh
-			cd ../neovim
+		if [ "${__nviminstalltype,,}" = "brew" ]; then
+			echo "Installing neovim from homebrew..."
+			# Run homebrew install script if it hasn't been run yet
+			if ! command -v brew &>/dev/null; then
+				echo "Homebrew not found. Installing homebrew before neovim..."
+				cd ../linuxbrew
+				./install.sh
+				cd ../neovim
+			fi
+			install_neovim_brew
+		elif [ "${__nviminstalltype,,}" = "source" ]; then
+			echo "Building neovim from source"
+			install_neovim_source
 		fi
-		install_neovim_brew
-	elif [ "${__nviminstalltype,,}" = "source" ]; then
-		echo "Building neovim from source"
-		install_neovim_source
+	else
+		echo "Neovim already installed"
 	fi
 
 	# Install packer.nvim (package manager)
