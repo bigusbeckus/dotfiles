@@ -42,7 +42,16 @@ function install_neovim() {
 	fi
 
 	# Install packer.nvim (package manager)
-	git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	# git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+	# Bing chat told me to do this
+	# - Start a headless neovim instance, run packadd, then immediately quit
+	if ! nvim --headless -c 'packadd packer.nvim' -c 'qa!' &>/dev/null; then
+		echo "Installing packer.nvim..."
+		git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	else
+		echo "packer.nvim is already installed."
+	fi
 }
 
 # Install
