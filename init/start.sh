@@ -87,7 +87,7 @@ cd ../config
 echo y | ./apply.sh # Fix the config script prompt to take flags instead
 
 # Set zsh as the default shell
-chsh -s /usr/bin/zsh
+echo "$SUDO_PASSWORD" | sudo chsh -s /usr/bin/zsh
 
 # Uncomment ZSH path export
 sed -Ei 's/# (export PATH=.+\:\$PATH)/\1/g' ~/.zshrc
