@@ -21,6 +21,12 @@ alias de="docker exec"
 alias dei="docker exec -i"
 alias deit="docker exec -it"
 
+# Docker db
+alias createpgdb='f() { local __user; if [ -z $3 ]; then __user=postgres; else __user=$3; fi; docker exec -i $1 createdb -U $__user $2; unset -f f; }; f'
+alias droppgdb='f() { local __user; if [ -z $3 ]; then __user=postgres; else __user=$3; fi; docker exec -i $1 dropdb -U $__user $2; unset -f f; }; f'
+alias lspgdb='f() { local __user; if [ -z $2 ]; then __user=postgres; else __user=$2; fi; docker exec -i $1 psql -U $__user -l; unset -f f; }; f'
+alias dumppgdb='f() { local __user; if [ -z $3 ]; then __user=postgres; else __user=$3; fi; docker exec -i $1 pg_dump -U $__user -d $2; unset -f f; }; f'
+
 # Shortcuts
 alias c="code"
 alias c.="code ."
@@ -51,7 +57,7 @@ alias yad="yarn add -d"
 alias yd="yarn dev"
 alias yi="yarn install"
 
-# Yarn (Orbit)
+# Yarn (Hasura)
 alias ydn="yarn down"
 alias yr="yarn rebuild"
 alias yc="yarn console"
@@ -61,3 +67,12 @@ alias yhl="yarn hasura:log"
 alias yal="yarn all:log"
 alias ym="yarn migrate"
 alias yhm="yarn hasura:migrate"
+
+# pnpm (Hasura)
+alias pdn="yarn down"
+alias pr="yarn rebuild"
+alias pc="yarn console"
+alias phc="yarn hasura:console"
+alias pel="yarn express:log"
+alias pal="yarn all:log"
+alias pm="yarn migrate"
