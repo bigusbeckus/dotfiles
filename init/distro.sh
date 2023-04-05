@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Detect OS (ubuntu, fedora, or arch)
 function get_os_name() {
@@ -43,8 +44,8 @@ function get_package_install_commands() {
 		echo "Using apt as the package manager"
 		eval $__installcmd="'apt install'"
 		eval $__upgradecmd="'apt update; apt upgrade'"
-		eval $__admininstallcmd="'sudo apt install'"
-		eval $__adminupgradecmd="'sudo apt update; sudo apt upgrade'"
+		eval $__admininstallcmd="'sudo -S apt install'"
+		eval $__adminupgradecmd="'sudo -S apt update; sudo apt upgrade'"
 		return 0
 	fi
 
@@ -52,8 +53,8 @@ function get_package_install_commands() {
 		echo "Using dnf as the package manager"
 		eval $__installcmd="'dnf install'"
 		eval $__upgradecmd="'dnf upgrade'"
-		eval $__admininstallcmd="'sudo dnf install'"
-		eval $__adminupgradecmd="'sudo dnf upgrade'"
+		eval $__admininstallcmd="'sudo -S dnf install'"
+		eval $__adminupgradecmd="'sudo -S dnf upgrade'"
 		return 0
 	fi
 
