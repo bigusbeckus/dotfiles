@@ -52,7 +52,6 @@ lsp.ensure_installed({
 	"prismals",
 	"rust_analyzer",
 	"lua_ls",
-	-- "sqls",
 	"sqlls",
 	"svelte",
 	"tailwindcss",
