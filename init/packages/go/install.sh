@@ -30,7 +30,10 @@ function install_latest_gvm() {
 	if ! command -v gvm &>/dev/null; then
 		# Install gvm (Go Version Manager)
 		bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-		# shellcheck source=/dev/null
+
+		# Add gvm to .zshrc
+		echo [[ -s \"$HOME/.gvm/srcripts/gvm\" ]] \&\& "source" \"$HOME/.gvm/scripts/gvm\" >>~/.zshrc
+
 		source ~/.gvm/scripts/gvm # Source gvm
 	else
 		echo "Go version manager already installed"
@@ -51,7 +54,6 @@ function install_golang() {
 			return 1
 		else
 			gvm install "$golatest"
-			# shellcheck source=/dev/null
 			source ~/.gvm/scripts/gvm
 			gvm use "$golatest"
 			return 0
