@@ -32,7 +32,7 @@ function install_latest_gvm() {
 		bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 
 		# Add gvm to .zshrc
-		echo [[ -s \"$HOME/.gvm/srcripts/gvm\" ]] \&\& "source" \"$HOME/.gvm/scripts/gvm\" >>~/.zshrc
+		echo [[ -s \"$HOME/.gvm/scripts/gvm\" ]] \&\& "source" \"$HOME/.gvm/scripts/gvm\" >>~/.zshrc
 
 		source ~/.gvm/scripts/gvm # Source gvm
 	else
