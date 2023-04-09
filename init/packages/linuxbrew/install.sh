@@ -12,9 +12,10 @@ function install_linuxbrew() {
 		NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 		# Set up Homebrew for Bash
-		if [[ -r ~/.bash_profile ]]; then
-			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bash_profile
+		if [[ ! -r ~/.bash_profile ]]; then
+			touch ~/.bash_profile
 		fi
+		echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bash_profile
 		# if [[ -r ~/.bashrc ]]; then
 		# 	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.bashrc
 		# fi
@@ -23,9 +24,10 @@ function install_linuxbrew() {
 		# if [[ -r ~/.zshrc ]]; then
 		# 	echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
 		# fi
-		if [[ -r ~/.zprofile ]]; then
-			echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zprofile
+		if [[ ! -r ~/.zprofile ]]; then
+			touch ~/.zprofile
 		fi
+		echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zprofile
 
 		# Add homebrew to path for use within the script
 		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
