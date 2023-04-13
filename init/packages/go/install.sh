@@ -55,7 +55,7 @@ function install_golang() {
 		else
 			gvm install "$golatest"
 			source ~/.gvm/scripts/gvm
-			gvm use "$golatest"
+			gvm use "$golatest" --default
 			return 0
 		fi
 	else
