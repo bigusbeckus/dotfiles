@@ -6,10 +6,12 @@ alias mkd='f(){ mkdir "$1" && cd "$1" }; f'
 
 alias sd='cd "$((fd . --type d | fzf) | sed "s/^$/""/")"'
 alias sdh='cd "$((fd . --full-path ~ --type d | fzf) | sed "s/^$/""/")"'
+alias sdr='cd "$((fd . --full-path / --type d | fzf) | sed "s/^$/""/")"'
 # alias sf='xdg-open "$((fd . --type f | fzf) | sed "s/^$/""/")" &> /dev/null' # No preview
 # alias sfh='xdg-open "$((fd . --full-path ~ --type f | fzf) | sed "s/^$/""/")" &> /dev/null' # No preview
 alias sf='xdg-open "$((fd . --type f | fzf --preview "cat {}" | xargs) | sed "s/^$/""/")" &> /dev/null' # With preview
 alias sfh='xdg-open "$((fd . --full-path ~ --type f | fzf --preview "cat {}" | xargs) | sed "s/^$/""/")" &> /dev/null' # With preview
+alias sfr='xdg-open "$((fd . --full-path / --type f | fzf) | sed "s/^$/""/")" &> /dev/null' # No preview
 # alias sdt='cd "$((fd . --type d | fzf) | sed "s/^$/""/")"'
 
 # Kubernetes
@@ -20,6 +22,7 @@ alias dps="docker ps"
 alias de="docker exec"
 alias dei="docker exec -i"
 alias deit="docker exec -it"
+# alias docker-clean-dangling="docker images -f \"dangling=true\" -q | docker rmi"
 
 # Docker db
 alias createpgdb='f() { local __user; if [ -z $3 ]; then __user=postgres; else __user=$3; fi; docker exec -i $1 createdb -U $__user $2; unset -f f; }; f'
@@ -50,12 +53,14 @@ alias pi="pnpm install"
 alias pid="pnpm install -D"
 alias pd="pnpm run dev"
 alias pnpr="pnpm run"
+alias prm="pnpm remove"
 
 # yarn
 alias ya="yarn add"
 alias yad="yarn add -d"
 alias yd="yarn dev"
 alias yi="yarn install"
+alias yrm="yarn remove"
 
 # Yarn (Hasura)
 alias ydn="yarn down"
