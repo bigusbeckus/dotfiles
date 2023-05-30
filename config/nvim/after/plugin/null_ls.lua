@@ -17,6 +17,11 @@ local deno_condition = function(utils)
 	})
 end
 
+-- local prettier_condition = function(utils)
+-- 	local current_buffer = vim.api.nvim_get_current_buf()
+-- 	return not vim.filetype.match({ buf = current_buffer }) == "vue"
+-- end
+
 null_ls.setup({
 	sources = {
 		-- Formatters
@@ -28,18 +33,27 @@ null_ls.setup({
 		}),
 		null_ls.builtins.formatting.markdownlint,
 		-- null_ls.builtins.formatting.prettier,
-		-- null_ls.builtins.formatting.eslint_d,
+		-- null_ls.builtins.formatting.packer,
 		null_ls.builtins.formatting.prettierd,
 		null_ls.builtins.formatting.shfmt,
 		-- null_ls.builtins.formatting.sql_formatter,
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.yamlfmt,
 		null_ls.builtins.formatting.sqlformat,
+		null_ls.builtins.formatting.taplo,
+		null_ls.builtins.formatting.terraform_fmt.with({
+			filetypes = { "terraform", "tf", "terraform-vars", "hcl" },
+		}),
+		null_ls.builtins.formatting.yamlfmt,
 		-- null_ls.builtins.diagnostics.sqlfluff.with({
 		-- 	extra_args = { "--dialect", "postgres" },
 		-- }),
 
 		-- Linters
+		null_ls.builtins.diagnostics.misspell,
+		null_ls.builtins.diagnostics.jsonlint,
+		null_ls.builtins.diagnostics.tfsec,
+		null_ls.builtins.diagnostics.terraform_validate,
+		-- null_ls.builtins.diagnostics.tflint,
 		null_ls.builtins.diagnostics.eslint_d.with({
 			condition = eslint_condition,
 		}),

@@ -202,7 +202,6 @@ return require("packer").startup(function(use)
 	})
 
 	-- Comment toggle plugins
-	-- use("terrortylor/nvim-comment")
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- Changes commentstring to use based on cursor position
 	use({
 		"numToStr/Comment.nvim",
@@ -235,7 +234,7 @@ return require("packer").startup(function(use)
 	vim.g.mkdp_theme = "dark"
 
 	-- Indent blankline
-	use("lukas-reineke/indent-blankline.nvim")
+	-- use("lukas-reineke/indent-blankline.nvim")
 
 	-- Vim vinegar
 	use("tpope/vim-vinegar")

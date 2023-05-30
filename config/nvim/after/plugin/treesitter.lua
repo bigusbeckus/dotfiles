@@ -1,9 +1,10 @@
+local disable_treesitter_highlight = false
+
 require("nvim-treesitter.configs").setup({
 	auto_install = true,
 	context_commentstring = {
 		enable = true,
 	},
-	-- ensure_installed = { "astro", "bash", "c", "c_sharp", "cmake", "comment", "cpp", "css", "dart", "lua", "rust" },
 	ensure_installed = {
 		"astro",
 		"bash",
@@ -22,6 +23,7 @@ require("nvim-treesitter.configs").setup({
 		"gomod",
 		"gowork",
 		"graphql",
+		"hcl",
 		"html",
 		"java",
 		"javascript",
@@ -45,20 +47,21 @@ require("nvim-treesitter.configs").setup({
 		"swift",
 		"toml",
 		"tsx",
+		"terraform",
 		"typescript",
 		"vim",
 		"vue",
 		"yaml",
 	},
 	highlight = {
-		enable = true,
-		disable = function(_, buf)
-			local max_filesize = 100000 * 1024
-			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-			if ok and stats and stats.size > max_filesize then
-				return true
-			end
+		-- enable = true,
+		enable = not disable_treesitter_highlight and function(_, bufnr)
+			return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) <= 100 * 1024
 		end,
+		max_file_lines = 10000,
+		-- disable = disable_treesitter_highlight or function(_, bufnr)
+		-- 	return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 100 * 1024
+		-- end,
 		additional_vim_regex_highlighting = false,
 	},
 	indent = {

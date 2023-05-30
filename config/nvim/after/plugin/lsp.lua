@@ -1,10 +1,10 @@
-require("neodev").setup({})
+require("neodev").setup()
 local mason_registry = require("mason-registry")
 
-local prefered_prettier = "prettierd"
--- local prefered_prettier = "prettier"
-local prefered_eslint = "eslint_d"
--- local prefered_eslint = "eslint"
+local preferred_prettier = "prettierd"
+-- local preferred_prettier = "prettier"
+local preferred_eslint = "eslint_d"
+-- local preferred_eslint = "eslint"
 
 local lsp = require("lsp-zero").preset({
 	name = "minimal",
@@ -47,7 +47,8 @@ lsp.ensure_installed({
 	"gradle_ls",
 	"graphql",
 	"html",
-	"jsonls",
+	"intelephense",
+	-- "jsonls",
 	"kotlin_language_server",
 	"prismals",
 	"rust_analyzer",
@@ -56,38 +57,50 @@ lsp.ensure_installed({
 	"svelte",
 	"tailwindcss",
 	"taplo",
+	"terraformls",
 	"tsserver",
+	"tflint",
 	"vimls",
 	"volar",
 	"yamlls",
 })
 
 -- Ensure eslint and prettier are installed
-if not mason_registry.is_installed(prefered_eslint) then
-	mason_registry.get_package(prefered_eslint):install({ version = "latest" })
-end
-if not mason_registry.is_installed(prefered_prettier) then
-	mason_registry.get_package(prefered_prettier):install({ version = "latest" })
+-- if not mason_registry.is_installed(preferred_eslint) then
+-- 	mason_registry.get_package(preferred_eslint):install({ version = "latest" })
+-- end
+if not mason_registry.is_installed(preferred_prettier) then
+	mason_registry.get_package(preferred_prettier):install({ version = "latest" })
 end
 
 -- Custom LSP configs
 local root_pattern = require("lspconfig").util.root_pattern
 
 -- Setup eslint root pattern
-lsp.use({ prefered_eslint }, {
-	root_dir = root_pattern(
-		".eslintrc",
-		".eslintrc.js",
-		".eslintrc.json",
-		".eslintrc.cjs",
-		".eslintrc.yml",
-		".eslintrc.yaml"
-	),
+-- lsp.use({ preferred_eslint }, {
+-- 	root_dir = root_pattern(
+-- 		".eslintrc",
+-- 		".eslintrc.js",
+-- 		".eslintrc.json",
+-- 		".eslintrc.cjs",
+-- 		".eslintrc.yml",
+-- 		".eslintrc.yaml"
+-- 	),
+-- })
+
+lsp.configure("terraformls", {
+	filetypes = { "tf", "terraform", "terraform-vars", "hcl" },
 })
 
--- Setup jsonls with common schemas
+-- lsp.configure("terraform_lsp", {
+-- 	cmd = { "terraform-lsp" },
+-- 	filetypes = { "tf", "terraform", "hcl", "tfstate" },
+-- 	root_dir = root_pattern(".terraform", ".git"),
+-- })
+
+--[[ -- Setup jsonls with common schemas
 lsp.configure("jsonls", {
-	filetypes = { "sqq", "json", "jsonc" },
+	filetypes = { "sqq", "json", "jsonc", "tfstate" },
 	settings = {
 		json = {
 			-- Manually configure JSON schemas https://www.schemastore.org
@@ -163,8 +176,7 @@ lsp.configure("jsonls", {
 			},
 		},
 	},
-})
-
+}) ]]
 lsp.configure("yamlls", {
 	filetypes = { "yaml", "yml" },
 	settings = {
@@ -194,6 +206,13 @@ vim.cmd([[
     autocmd BufNewFile,BufRead launch.json setlocal filetype=jsonc
     autocmd BufNewFile,BufRead tsconfig.json setlocal filetype=jsonc
   augroup end
+]])
+
+-- Recognize known json files with non json extensions
+vim.cmd([[
+augroup jsondetect
+    autocmd BufNewFile,BufRead *.tfstate setlocal filetype=json
+augroup end
 ]])
 
 -- Set deno-ls root pattern to fix conflicts with tsserver
@@ -262,6 +281,10 @@ lsp.setup_nvim_cmp({
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 lsp.on_attach(function(client, bufnr)
+	-- Disable LSP syntax highlighting (we're using treesitter instead)
+	client.server_capabilities.semanticTokensProvider = nil
+
+	-- Setup LSP specific keybinds
 	-- local opts = { buffer = bufnr, remap = false }
 
 	vim.keymap.set(

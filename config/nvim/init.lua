@@ -21,21 +21,19 @@ vim.opt.fixeol = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.opt.cursorline = false
+
 -- Permanently enable gutters to avoid shifting with lsp-zero icons that I haven't figured out how to disable yet
 vim.opt.signcolumn = "yes"
 
 -- Get underline cursor in some mods (wohooo)
 vim.opt.guicursor = "n-v:block,i-c-ci-cr-r:ver25-hor50"
 
+-- Disable vim's default syntax highlighting (we'll be using treesitter)
+-- vim.cmd([[ syntax off ]])
+
 -- IndentBlankline backgrounds
 vim.opt.termguicolors = true
-vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
-vim.cmd([[highlight IndentBlanklineIndentGray guifg=#5A5A5A gui=nocombine]])
 
 -- Import custom plugins and configs
 require("beck.plugins")
@@ -47,8 +45,8 @@ require("beck.keys")
 -- Set colorscheme
 vim.o.background = "dark"
 -- vim.cmd("colorscheme poimandres")
-vim.cmd("colorscheme tokyonight")
--- vim.cmd("colorscheme gruvbox")
+-- vim.cmd("colorscheme tokyonight")
+vim.cmd("colorscheme gruvbox")
 
 -- Autocommand to recompile packer managed plugins on write to plugins.lua
 vim.cmd([[
@@ -67,7 +65,22 @@ vim.cmd([[
   augroup END
 ]])
 
+-- Autocommand to disable vim's default syntax highlighting for everything except shell scripts
+-- vim.cmd([[
+--   augroup syntax_highlight
+--     autocmd!
+--     autocmd BufEnter * if &buftype != 'sh' && &buftype != 'bash' || &buftype != 'zsh' | syntax off | endif
+--   augroup END
+-- ]])
+
 -- Neovide configs
 if vim.g.neovide then
 	require("beck.neovide")
 end
+
+-- local current_buffer = vim.api.nvim_get_current_buf()
+-- local filetype = vim.filetype.match({ buf = current_buffer })
+-- if not (filetype == "bash" or filetype == "zsh") then
+-- 	-- vim.opt.syntax = "off"
+-- vim.cmd([[ syntax off ]])
+-- end
