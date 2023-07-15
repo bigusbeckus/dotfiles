@@ -89,11 +89,11 @@ require("nvim-treesitter.configs").setup({
 				["[L"] = { query = "@loop.outer", desc = "Previous loop end" },
 			},
 			goto_next = {
-				["]d"] = { query = "@conditional.outer", desc = "Next conditional" },
+				["]c"] = { query = "@conditional.outer", desc = "Next conditional" },
 				["]r"] = { query = "@return.outer", desc = "Next return" },
 			},
 			goto_previous = {
-				["[d"] = { query = "@conditional.outer", desc = "Previous conditional" },
+				["[c"] = { query = "@conditional.outer", desc = "Previous conditional" },
 				["[r"] = { query = "@return.outer", desc = "Previous return" },
 			},
 		},
@@ -105,8 +105,8 @@ require("nvim-treesitter.configs").setup({
 				-- Source: https://github.com/nvim-treesitter/nvim-treesitter-textobjects#built-in-textobjects
 				["af"] = { query = "@function.outer", desc = "Select function" },
 				["if"] = { query = "@function.inner", desc = "Select inner part of a function region" },
-				["ac"] = { query = "@class.outer", desc = "Select class" },
-				["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+				["aC"] = { query = "@class.outer", desc = "Select class" },
+				["iC"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 				-- Additional
 				["aa"] = { query = "@frame.outer", desc = "Select assignment" },
 				["ia"] = { query = "@frame.inner", desc = "Select inner part of an assignment" },
@@ -116,8 +116,8 @@ require("nvim-treesitter.configs").setup({
 				-- ["ic"] = { query = "@comment.inner", desc = "Select inner part of a comment" },
 				["al"] = { query = "@loop.outer", desc = "Select loop" },
 				["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
-				["ad"] = { query = "@conditional.outer", desc = "Select conditional" },
-				["id"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
+				["ac"] = { query = "@conditional.outer", desc = "Select conditional" },
+				["ic"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
 				["ar"] = { query = "@return.outer", desc = "Select return statement" },
 				["ir"] = { query = "@return.inner", desc = "Select inner part of a return statement" },
 				["as"] = { query = "@statement.outer", desc = "Select statement" },

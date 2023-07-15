@@ -1,3 +1,9 @@
+local dap_still_broken = true
+
+if dap_still_broken then
+  return
+end
+
 local dap = require("dap")
 local mason_nvim_dap = require("mason-nvim-dap")
 

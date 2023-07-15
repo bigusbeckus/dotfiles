@@ -6,6 +6,13 @@ return require("packer").startup(function(use)
 	-- Neovim config helper
 	use("folke/neodev.nvim")
 
+	-- Useful LSP status updates
+	-- Note: Pinned to the `legacy` tag for now. Update after it is rewritten.
+	use({
+		"j-hui/fidget.nvim",
+		tag = "legacy",
+	})
+
 	-- LSP config
 	use({
 		"VonHeikemen/lsp-zero.nvim",
@@ -14,9 +21,6 @@ return require("packer").startup(function(use)
 			"neovim/nvim-lspconfig", -- Required
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-
-			-- Useful LSP status updates
-			"j-hui/fidget.nvim",
 
 			-- Autocompletion
 			"hrsh7th/nvim-cmp", -- Required
@@ -62,6 +66,17 @@ return require("packer").startup(function(use)
 		},
 		sidebars = { "qf", "help", "terminal", "packer" },
 	})
+
+	-- Rose Pine theme
+	use({ "rose-pine/neovim", as = "rose-pine" })
+	require("rose-pine").setup({
+		variant = "moon",
+		disable_background = true,
+		-- dim_nc_background = true,
+	})
+
+	-- Night owl theme
+	use("haishanh/night-owl.vim")
 
 	-- Poimandres theme
 	-- use({
@@ -113,13 +128,13 @@ return require("packer").startup(function(use)
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	-- VSCode js/ts debugger
 	-- Source: https://github.com/mxsdev/nvim-dap-vscode-js
-	use({
-		"microsoft/vscode-js-debug",
-		opt = true,
-		run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
-	})
-	use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
-	use("Pocco81/DAPInstall.nvim")
+	-- use({
+	-- 	"microsoft/vscode-js-debug",
+	-- 	opt = true,
+	-- 	run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+	-- })
+	-- use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
+	-- use("Pocco81/DAPInstall.nvim")
 
 	-- nvim-dap UI
 	-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
@@ -238,6 +253,9 @@ return require("packer").startup(function(use)
 
 	-- Vim vinegar
 	use("tpope/vim-vinegar")
+
+	-- Case coersion and fixing words
+	use("tpope/vim-abolish")
 
 	-- Cellular automaton (this just looks fun as hell)
 	use("eandrju/cellular-automaton.nvim")

@@ -40,6 +40,7 @@ lsp.nvim_workspace({
 lsp.ensure_installed({
 	"astro",
 	"bashls",
+	"clangd",
 	"cssls",
 	"denols",
 	"dockerls",
@@ -48,8 +49,9 @@ lsp.ensure_installed({
 	"graphql",
 	"html",
 	"intelephense",
-	-- "jsonls",
+	"jsonls",
 	"kotlin_language_server",
+	"lua_ls",
 	"prismals",
 	"rust_analyzer",
 	"lua_ls",
@@ -98,7 +100,7 @@ lsp.configure("terraformls", {
 -- 	root_dir = root_pattern(".terraform", ".git"),
 -- })
 
---[[ -- Setup jsonls with common schemas
+-- Setup jsonls with common schemas
 lsp.configure("jsonls", {
 	filetypes = { "sqq", "json", "jsonc", "tfstate" },
 	settings = {
@@ -131,7 +133,10 @@ lsp.configure("jsonls", {
 				},
 				{
 					description = "ESLint config",
-					fileMatch = { ".eslintrc", ".eslintrc.json" },
+					fileMatch = {
+						".eslintrc",
+						".eslintrc.json",
+					},
 					url = "https://json.schemastore.org/eslintrc.json",
 				},
 				{
@@ -176,7 +181,7 @@ lsp.configure("jsonls", {
 			},
 		},
 	},
-}) ]]
+})
 lsp.configure("yamlls", {
 	filetypes = { "yaml", "yml" },
 	settings = {
@@ -218,6 +223,10 @@ augroup end
 -- Set deno-ls root pattern to fix conflicts with tsserver
 lsp.configure("denols", {
 	root_dir = root_pattern("deno.json", "deno.jsonc"),
+})
+
+lsp.configure("clangd", {
+	filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 })
 
 -- Setup lua language server

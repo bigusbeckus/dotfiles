@@ -44,9 +44,11 @@ require("beck.keys")
 
 -- Set colorscheme
 vim.o.background = "dark"
+-- vim.cmd("colorscheme gruvbox")
 -- vim.cmd("colorscheme poimandres")
 -- vim.cmd("colorscheme tokyonight")
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme rose-pine")
+-- vim.cmd("colorscheme night-owl")
 
 -- Autocommand to recompile packer managed plugins on write to plugins.lua
 vim.cmd([[

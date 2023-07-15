@@ -7,8 +7,7 @@
         "~/.config/nvim",
         "${3rd}/luassert/library",
         "/home/beck/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/70adc056",
-        "/home/beck/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/7c9cc619",
-        "/home/beck/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/53d8203b"
+        "/home/beck/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/7c9cc619"
     ],
     "workspace.checkThirdParty": false
 }
