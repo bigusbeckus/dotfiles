@@ -26,12 +26,13 @@ list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', '07596f62-d9af-4968-843a-b0daf5325
 
 [profiles/07596f62-d9af-4968-843a-b0daf53251fd]
 background-color='#0C0C0D0D1818'
-background-transparency-percent=10
+background-transparency-percent=7
 backspace-binding='ascii-delete'
 cursor-shape='underline'
 default-size-columns=120
 default-size-rows=48
 dim-transparency-percent=0
+font='JetBrainsMono Nerd Font 13'
 foreground-color='#EEEEEEEEECEC'
 login-shell=true
 palette=['#2E2E34343636', '#CCCC00000000', '#4E4E9A9A0606', '#C4C4A0A00000', '#34346565A4A4', '#757550507B7B', '#060698209A9A', '#D3D3D7D7CFCF', '#555557575353', '#EFEF29292929', '#8A8AE2E23434', '#FCFCE9E94F4F', '#72729F9FCFCF', '#ADAD7F7FA8A8', '#3434E2E2E2E2', '#EEEEEEEEECEC']
@@ -39,6 +40,7 @@ scroll-on-output=false
 scrollback-lines=8192
 scrollback-unlimited=false
 terminal-bell='none'
+use-system-font=false
 use-theme-colors=false
 visible-name='Transparent'
 
