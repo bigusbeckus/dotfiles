@@ -22,6 +22,7 @@ alias dps="docker ps"
 alias de="docker exec"
 alias dei="docker exec -i"
 alias deit="docker exec -it"
+alias docker-compose="docker compose"
 # alias docker-clean-dangling="docker images -f \"dangling=true\" -q | docker rmi"
 
 # Docker db
@@ -31,8 +32,10 @@ alias lspgdb='f() { local __user; if [ -z $2 ]; then __user=postgres; else __use
 alias dumppgdb='f() { local __user; if [ -z $3 ]; then __user=postgres; else __user=$3; fi; docker exec -i $1 pg_dump -U $__user -d $2; unset -f f; }; f'
 
 # Shortcuts
-alias c="code"
-alias c.="code ."
+alias c="codium"
+alias c.="codium ."
+# alias c="code"
+# alias c.="code ."
 alias n="nvim"
 alias n.="nvim ."
 alias t="tmux"
@@ -45,8 +48,8 @@ alias git-clear-permission-changes="git diff -p -R --no-ext-diff --no-color | gr
 # npm
 alias ni="npm install"
 alias nid="npm install --save-dev"
-alias nxr="npx run"
-alias nxd="npx run dev"
+alias nr="npm run"
+alias nd="npm run dev"
 
 # pnpm
 alias pi="pnpm install"
@@ -81,3 +84,13 @@ alias phc="pnpm hasura:console"
 alias pel="pnpm express:log"
 alias pal="pnpm all:log"
 alias pm="pnpm migrate"
+
+# Go
+alias gor="go run"
+alias gor.="go run ."
+alias goi="go mod tidy"
+alias gom="go mod"
+alias gomd="go mod download"
+alias gomi="go mod init"
+alias gomt="go mod tidy"
+alias gomv="go mod vendor"
