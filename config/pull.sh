@@ -7,6 +7,8 @@ git_config_filename=.gitconfig
 tmux_config_filename=.tmux.conf
 git_config_file=~/$git_config_filename
 tmux_config_file=~/$tmux_config_filename
+alacritty_config_dir=~/.config/alacritty
+zsh_profile_file=~/.zprofile
 
 # Copy over .gitconfig if it exists
 if [ -f "$git_config_file" ]; then
@@ -45,6 +47,24 @@ if [ -d "$zsh_config_dir" ]; then
 	echo "Oh-My-Zsh config files copied."
 else
 	echo "Oh-My-Zsh config directory not found."
+fi
+
+if [ -d "$alacritty_config_dir" ]; then
+	# Create the alacritty config directory if it doesn't already exist
+	mkdir -p alacritty
+	# Copy the config files
+	cp -r "$alacritty_config_dir"/* alacritty
+	echo "Alacritty config files copied."
+else
+	echo "Alacritty config directory not found."
+fi
+
+# Copy over .zprofile if it exists
+if [ -f "$zsh_profile_file" ]; then
+	mkdir -p zsh
+	# Copy the config file
+	cp "$zsh_profile_file" zsh/.zprofile
+	echo "Git global config copied."
 fi
 
 dconf dump /com/gexperts/Tilix/ >tilix/tilix.dconf && echo "Tilix config files copied"
