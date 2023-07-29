@@ -98,5 +98,5 @@ echo "$SUDO_PASSWORD" | sudo chsh -s /usr/bin/zsh
 # Uncomment ZSH path export
 sed -Ei 's/# (export PATH=.+\:\$PATH)/\1/g' ~/.zshrc
 
-# Set my minibash theme
-sed -Ei 's/ZSH_THEME=".+"/ZSH_THEME="minibash"/g' ~/.zshrc
+# Set the rose-pine theme
+sed -Ei 's/ZSH_THEME=".+"/ZSH_THEME="px-rose-pine-mod"/g' ~/.zshrc
