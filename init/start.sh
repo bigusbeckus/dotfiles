@@ -61,6 +61,12 @@ eval "echo "$password" | $admininstallcmd \
   bison \
   -y"
 
+# Install clipboard managers
+eval "echo "$password" | $admininstallcmd \
+  xclip \
+  wl-clipboard \
+  -y"
+
 # Install homebrew prerequisite packages
 if [ "${os,,}" = "ubuntu" ]; then
 	source prerequisites/ubuntu.sh
