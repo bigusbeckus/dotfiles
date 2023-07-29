@@ -1,9 +1,19 @@
 # dotfiles
 
-My attempt at automating my linux setup
+My attempt at automating my linux setup. It has two main sections:
 
-- init: Initializes a fresh linux install (ubuntu and fedora supported)
-  - Steps: Install git, clone this repo, run script
+### Init
 
-## To-Do
-- [ ] Init: Install both `xclip` and `wl-clipboard`
+Folder: `init`
+
+Automates program installation and configuration on fresh linux installs (ubuntu and fedora supported).
+
+See: [Init readme](init/README.md)
+
+### Config
+
+Folder: `config`
+
+Contains configs for my most commonly used programs.
+
+See: [config readme](config/README.md) for more information.
