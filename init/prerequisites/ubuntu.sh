@@ -14,4 +14,10 @@ function install_ubuntu_packages() {
 		python3-venv \
 		binutils \
 		-y
+	echo "$__password" | sudo -S apt install \
+		libfreetype6-dev \
+		libfontconfig1-dev \
+		libxcb-xfixes0-dev \
+		libxkbcommon-dev \
+		-y
 }

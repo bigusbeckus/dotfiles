@@ -13,4 +13,11 @@ function install_fedora_packages() {
 		python3-virtualenv \
 		glibc-devel \
 		-y
+	echo "$__password" | sudo -S dnf install \
+		freetype-devel \
+		fontconfig-devel \
+		libxcb-devel \
+		libxkbcommon-devel \
+		g++ \
+		-y
 }
