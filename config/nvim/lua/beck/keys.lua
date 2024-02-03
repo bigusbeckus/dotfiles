@@ -30,6 +30,11 @@ vim.keymap.set("n", "<leader>f", function()
 	})
 end)
 
+-- Zen mode
+vim.keymap.set("n", "<leader>zz", function()
+	require("zen-mode").toggle()
+end)
+
 -- Unbound netrw rebind because vim-vinegar is better
 -- Netrw rebind
 -- vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)

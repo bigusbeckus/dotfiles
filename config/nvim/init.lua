@@ -21,12 +21,14 @@ vim.opt.fixeol = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.opt.cursorline = false
+-- vim.opt.cursorline = false
+vim.opt.cursorline = true
+vim.opt.cursorcolumn = true
 
 -- Permanently enable gutters to avoid shifting with lsp-zero icons that I haven't figured out how to disable yet
 vim.opt.signcolumn = "yes"
 
--- Get underline cursor in some mods (wohooo)
+-- Get underline cursor in some modes (woohooo)
 vim.opt.guicursor = "n-v:block,i-c-ci-cr-r:ver25-hor50"
 
 -- Disable vim's default syntax highlighting (we'll be using treesitter)
@@ -46,9 +48,10 @@ require("beck.keys")
 vim.o.background = "dark"
 -- vim.cmd("colorscheme gruvbox")
 -- vim.cmd("colorscheme poimandres")
--- vim.cmd("colorscheme tokyonight")
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme tokyonight")
+-- vim.cmd("colorscheme rose-pine")
 -- vim.cmd("colorscheme night-owl")
+-- vim.cmd("colorscheme vscode")
 
 -- Autocommand to recompile packer managed plugins on write to plugins.lua
 vim.cmd([[
@@ -80,7 +83,22 @@ if vim.g.neovide then
 	require("beck.neovide")
 end
 
+-- Support syntax highlighting for Valve's VDF formatted acf files
+local file_extension = vim.fn.expand("%:e")
+if file_extension == "acf" then
+	vim.opt.filetype = "vdf"
+end
+
+-- Disable vim's object collapsing for vdf type files
+vim.cmd([[
+  augroup disable_vdf_object_collapse
+    autocmd!
+    autocmd FileType vdf setlocal nofoldenable
+  augroup END
+]])
+
 -- local current_buffer = vim.api.nvim_get_current_buf()
+-- local filename = vim.api.nvim_buf_get_name(current_buffer)
 -- local filetype = vim.filetype.match({ buf = current_buffer })
 -- if not (filetype == "bash" or filetype == "zsh") then
 -- 	-- vim.opt.syntax = "off"

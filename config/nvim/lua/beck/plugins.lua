@@ -3,6 +3,9 @@ return require("packer").startup(function(use)
 	-- Load packer
 	use("wbthomason/packer.nvim")
 
+	-- Plenary
+	use("nvim-lua/plenary.nvim")
+
 	-- Neovim config helper
 	use("folke/neodev.nvim")
 
@@ -10,12 +13,25 @@ return require("packer").startup(function(use)
 	-- Note: Pinned to the `legacy` tag for now. Update after it is rewritten.
 	use({
 		"j-hui/fidget.nvim",
-		tag = "legacy",
+		tag = "v1.2.0",
+	})
+	require("fidget").setup({
+		progress = {
+			display = {
+				done_ttl = 1,
+			},
+		},
+		notification = {
+			window = {
+				winblend = 0,
+			},
+		},
 	})
 
 	-- LSP config
 	use({
 		"VonHeikemen/lsp-zero.nvim",
+		branch = "v2.x",
 		requires = {
 			-- LSP Support
 			"neovim/nvim-lspconfig", -- Required
@@ -70,15 +86,38 @@ return require("packer").startup(function(use)
 	-- Rose Pine theme
 	use({ "rose-pine/neovim", as = "rose-pine" })
 	require("rose-pine").setup({
-		variant = "moon",
+		-- variant = "moon",
 		disable_background = true,
 		-- dim_nc_background = true,
 	})
 
+	-- use("olimorris/onedarkpro.nvim")
+	-- require("onedarkpro").setup({
+	-- 	options = {
+	-- 		transparent = true,
+	-- 	},
+	-- })
+
 	-- Night owl theme
-	use("haishanh/night-owl.vim")
+	use("oxfist/night-owl.vim")
+
+	-- VScode theme (boooo, hissss...)
+	use("Mofiqul/vscode.nvim")
+	require("vscode").setup({
+		transparent = true,
+		-- italic_comments = true,
+	})
 
 	-- Poimandres theme
+	use({
+		"olivercederborg/poimandres.nvim",
+	})
+	require("poimandres").setup({
+		bold_vert_spilt = false,
+		disable_background = true,
+		dim_nc_background = true, -- dim the 'non-current' window's background
+		disable_italics = false,
+	})
 	-- use({
 	-- 	--   'olivercederborg/poimandres.nvim',
 	-- 	"~/Documents/Personal/nvim/poimandres.nvim",
@@ -148,6 +187,7 @@ return require("packer").startup(function(use)
 	-- Harpoon
 	use({
 		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
@@ -289,4 +329,21 @@ return require("packer").startup(function(use)
 
 	-- Github copilot
 	use("github/copilot.vim")
+
+	-- Go Templ
+	use({
+		"vrischmann/tree-sitter-templ",
+		config = function()
+			require("tree-sitter-templ").setup({})
+		end,
+	})
+
+	-- Cloak nvim
+	use("laytan/cloak.nvim")
+
+	-- Undotree
+	use("mbbill/undotree")
+
+	-- Zen mode
+	use("folke/zen-mode.nvim")
 end)

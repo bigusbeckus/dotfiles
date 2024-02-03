@@ -1,4 +1,5 @@
-require("neodev").setup()
+local disable_lsp_syntax_highlight = true
+require("neodev").setup({})
 local mason_registry = require("mason-registry")
 
 local preferred_prettier = "prettierd"
@@ -59,7 +60,7 @@ lsp.ensure_installed({
 	"svelte",
 	"tailwindcss",
 	"taplo",
-  "templ",
+	"templ",
 	"terraformls",
 	"tsserver",
 	"tflint",
@@ -93,6 +94,10 @@ local root_pattern = require("lspconfig").util.root_pattern
 
 lsp.configure("terraformls", {
 	filetypes = { "tf", "terraform", "terraform-vars", "hcl" },
+})
+
+lsp.configure("graphql", {
+	filetypes = { "graphql", "gql" },
 })
 
 -- lsp.configure("terraform_lsp", {
@@ -183,6 +188,7 @@ lsp.configure("jsonls", {
 		},
 	},
 })
+
 lsp.configure("yamlls", {
 	filetypes = { "yaml", "yml" },
 	settings = {
@@ -197,6 +203,14 @@ lsp.configure("yamlls", {
 						"docker-compose*.yaml",
 					},
 					url = "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json",
+				},
+				{
+					description = "Code Rabbit",
+					fileMatch = {
+						".coderabbit.yml",
+						".coderabbit.yaml",
+					},
+					url = "https://coderabbit.ai/integrations/coderabbit-overrides.v2.json",
 				},
 			},
 		},
@@ -234,6 +248,9 @@ lsp.configure("clangd", {
 -- lsp.configure("lua_ls", {
 -- 	settings = {
 -- 		Lua = {
+-- 			completion = {
+-- 				callSnippet = "Replace",
+-- 			},
 -- 			runtime = {
 -- 				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
 -- 				version = "LuaJIT",
@@ -262,6 +279,9 @@ lsp.configure("tailwindcss", {
 if vim.fn.executable("dart") == 1 then
 	lsp.configure("dartls")
 end
+
+-- Language server for qmljs files (kde config)
+lsp.configure("qml_lsp")
 
 -- nvim-cmp configuration
 local cmp = require("cmp")
@@ -292,7 +312,9 @@ lsp.setup_nvim_cmp({
 -- after the language server attaches to the current buffer
 lsp.on_attach(function(client, bufnr)
 	-- Disable LSP syntax highlighting (we're using treesitter instead)
-	client.server_capabilities.semanticTokensProvider = nil
+	if disable_lsp_syntax_highlight then
+		client.server_capabilities.semanticTokensProvider = nil
+	end
 
 	-- Setup LSP specific keybinds
 	-- local opts = { buffer = bufnr, remap = false }
@@ -344,13 +366,13 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.signature_help,
 		{ buffer = bufnr, remap = false, desc = "Signature [H]elp (Insert mode)" }
 	)
-
 	vim.keymap.set(
 		"n",
 		"<C-k>",
 		vim.lsp.buf.signature_help,
 		{ buffer = bufnr, remap = false, desc = "[<C-k>] Signature help (Normal mode)" }
 	)
+
 	vim.keymap.set(
 		"n",
 		"<leader>wa",
@@ -395,17 +417,6 @@ lsp.on_attach(function(client, bufnr)
 	end
 end)
 
--- Setup fidget.nvim - An LSP progress UI
-require("fidget").setup({
-	timer = {
-		fidget_decay = 700,
-		task_decay = 300,
-	},
-	window = {
-		blend = 0,
-	},
-})
-
 -- Setup lsp-zero
 lsp.setup()
 
@@ -420,7 +431,7 @@ vim.diagnostic.config({
 	underline = true,
 	severity_sort = true,
 	float = {
-		focusable = false,
+		focusable = true,
 		style = "minimal",
 		border = "rounded",
 		source = "always",

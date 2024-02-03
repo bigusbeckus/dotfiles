@@ -1,10 +1,19 @@
 local disable_treesitter_highlight = false
+local treesitter_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+treesitter_parser_config.templ = {
+	install_info = {
+		url = "https://github.com/vrischmann/tree-sitter-templ.git",
+		files = { "src/parser.c", "src/scanner.c" },
+		branch = "master",
+	},
+}
+
+require("ts_context_commentstring").setup({})
+vim.g.skip_ts_context_commentstring_module = true
 
 require("nvim-treesitter.configs").setup({
 	auto_install = true,
-	context_commentstring = {
-		enable = true,
-	},
 	ensure_installed = {
 		"astro",
 		"bash",
@@ -45,6 +54,7 @@ require("nvim-treesitter.configs").setup({
 		"sql",
 		"svelte",
 		"swift",
+		"templ",
 		"toml",
 		"tsx",
 		"terraform",

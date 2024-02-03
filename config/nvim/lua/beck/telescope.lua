@@ -4,6 +4,8 @@ local themes = require("telescope.themes")
 vim.keymap.set("n", "<leader>sf", function()
 	builtin.find_files({
 		hidden = true,
+		no_ignore = true,
+		no_ignore_parent = true,
 	})
 end, { noremap = true, desc = "[S]earch [F]iles" })
 vim.keymap.set("n", "<leader>sh", builtin.help_tags, { noremap = true, desc = "[S]earch [H]elp" })
