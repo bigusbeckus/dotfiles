@@ -7,6 +7,7 @@ function install_fedora_packages() {
 	echo "$__password" | sudo -S dnf groupinstall 'Development Tools' -y
 	echo "$__password" | sudo -S dnf install \
 		gcc-c++ \
+    musl-gcc \
 		patch \
 		pkgconfig \
 		procps-ng \
