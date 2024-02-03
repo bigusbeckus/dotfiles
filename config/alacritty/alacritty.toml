@@ -1,5 +1,6 @@
 # import = ["~/.config/alacritty/rose-pine.toml"]
 import = ["~/.config/alacritty/xterm.toml"]
+# import = ["~/.config/alacritty/poimandres.toml"]
 
 shell.program = "/bin/zsh"
 shell.args = ["--login"]
@@ -9,14 +10,33 @@ TERM = "xterm-256color"
 
 [window]
 startup_mode = "Maximized"
-decorations = "None"
-opacity = 0.95
+decorations = "none"
+opacity = 0.85
 padding.x = 0
 padding.y = 0
 
 [font]
-normal.family = "JetBrains Mono Nerd Font"
-size = 10.0
+# normal.family = "Agave Nerd Font Mono"
+# normal.family = "BitstromWera Nerd Font Mono"
+# normal.family = "ComicShannsMono Nerd Font Mono"
+# normal.family = "EnvyCodeR Nerd Font Mono"
+# normal.family = "GeistMono Nerd Font Mono"
+# normal.family = "Gohufont 11 Nerd Font Mono"
+normal.family = "IosevkaTerm Nerd Font Mono"
+# normal.family = "JetBrains Mono Nerd Font Mono"
+# normal.family = "OpenDyslexicM Nerd Font Mono"
+# normal.family = "ShureTechMono Nerd Font Mono"
+# normal.family = "Terminess Nerd Font Mono"
+# size = 10.0
+# size = 13.0
+size = 14.0
+
+[cursor]
+style.shape = "Block"
+style.blinking = "Always"
+blink_interval = 150
+blink_timeout = 180
 
 [colors.primary]
 background = "#0C0D18"
+# background = "#242424"

@@ -20,4 +20,4 @@ yellow = "0xcdcd00"
 
 [colors.primary]
 background = "0x000000"
-foreground = "0xffffff"
+foreground = "0xeeeeee"
