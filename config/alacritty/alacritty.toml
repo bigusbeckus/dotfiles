@@ -1,4 +1,5 @@
-import = ["~/.config/alacritty/rose-pine.toml"]
+# import = ["~/.config/alacritty/rose-pine.toml"]
+import = ["~/.config/alacritty/xterm.toml"]
 
 shell.program = "/bin/zsh"
 shell.args = ["--login"]
@@ -15,7 +16,7 @@ padding.y = 0
 
 [font]
 normal.family = "JetBrains Mono Nerd Font"
-size = 13.0
+size = 10.0
 
 [colors.primary]
 background = "#0C0D18"
