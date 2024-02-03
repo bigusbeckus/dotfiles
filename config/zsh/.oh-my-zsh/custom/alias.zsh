@@ -1,6 +1,9 @@
 # Questionable life decisions
 # alias fuckyou='git push --force'
 
+# It ain't much but it's honest work
+alias nano='nvim'
+
 # Quality of life
 alias mkd='f(){ mkdir "$1" && cd "$1" }; f'
 
@@ -14,8 +17,9 @@ alias sfh='xdg-open "$((fd . --full-path ~ --type f | fzf --preview "cat {}" | x
 alias sfr='xdg-open "$((fd . --full-path / --type f | fzf) | sed "s/^$/""/")" &> /dev/null' # No preview
 # alias sdt='cd "$((fd . --type d | fzf) | sed "s/^$/""/")"'
 
-# Kubernetes
+# Minikube
 alias kubectl="minikube kubectl --"
+alias mdocker="eval $(minikube docker-env)"
 
 # Docker
 alias dps="docker ps"
@@ -101,3 +105,6 @@ alias gomd="go mod download"
 alias gomi="go mod init"
 alias gomt="go mod tidy"
 alias gomv="go mod vendor"
+
+# Apps
+alias pvpn="sudo protonvpn"
