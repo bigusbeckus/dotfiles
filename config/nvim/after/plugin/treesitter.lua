@@ -89,11 +89,11 @@ require("nvim-treesitter.configs").setup({
 				["[L"] = { query = "@loop.outer", desc = "Previous loop end" },
 			},
 			goto_next = {
-				["]c"] = { query = "@conditional.outer", desc = "Next conditional" },
+				-- ["]c"] = { query = "@conditional.outer", desc = "Next conditional" },
 				["]r"] = { query = "@return.outer", desc = "Next return" },
 			},
 			goto_previous = {
-				["[c"] = { query = "@conditional.outer", desc = "Previous conditional" },
+				-- ["[c"] = { query = "@conditional.outer", desc = "Previous conditional" },
 				["[r"] = { query = "@return.outer", desc = "Previous return" },
 			},
 		},

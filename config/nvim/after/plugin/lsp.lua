@@ -59,6 +59,7 @@ lsp.ensure_installed({
 	"svelte",
 	"tailwindcss",
 	"taplo",
+  "templ",
 	"terraformls",
 	"tsserver",
 	"tflint",

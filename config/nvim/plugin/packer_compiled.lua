@@ -115,6 +115,11 @@ _G.packer_plugins = {
     path = "/home/beck/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/home/beck/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
   ["fidget.nvim"] = {
     loaded = true,
     path = "/home/beck/.local/share/nvim/site/pack/packer/start/fidget.nvim",
@@ -311,26 +316,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: telescope-fzf-native.nvim
-time([[Config for telescope-fzf-native.nvim]], true)
-try_loadstring("\27LJ\2\nÔ\2\0\0\t\0\19\0\0286\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\r\0005\3\4\0005\4\3\0=\4\5\0035\4\n\0005\5\b\0006\6\0\0'\b\6\0B\6\2\0029\6\a\6=\6\t\5=\5\v\4=\4\f\3=\3\14\0025\3\15\0=\3\16\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\17\0'\2\18\0B\0\2\1K\0\1\0\bfzf\19load_extension\fpickers\1\0\1\20layout_strategy\rvertical\rdefaults\1\0\0\rmappings\6i\1\0\0\n<Esc>\1\0\0\nclose\22telescope.actions\25file_ignore_patterns\1\0\0\1\6\0\0\21node%_modules/.*\r%.git/.*\r^dist/.*\14^.next/.*\14^.nuxt/.*\nsetup\14telescope\frequire\0", "config", "telescope-fzf-native.nvim")
-time([[Config for telescope-fzf-native.nvim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n}\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\28current_line_blame_opts\1\0\1\ndelay\3–\1\1\0\1\23current_line_blame\2\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 try_loadstring("\27LJ\2\nþ\2\0\0\6\0\15\0\0216\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\0025\3\b\0=\3\t\0025\3\n\0=\3\v\0026\3\0\0'\5\f\0B\3\2\0029\3\r\3B\3\1\2=\3\14\2B\0\2\1K\0\1\0\rpre_hook\20create_pre_hook7ts_context_commentstring.integrations.comment_nvim\rmappings\1\0\2\nextra\2\nbasic\2\nextra\1\0\3\beol\15<leader>cA\nbelow\15<leader>co\nabove\15<leader>cO\ropleader\1\0\2\tline\14<leader>c\nblock\15<leader>cb\ftoggler\1\0\2\tline\15<leader>cc\nblock\16<leader>cbc\1\0\2\vsticky\2\fpadding\2\nsetup\fComment\frequire\0", "config", "Comment.nvim")
 time([[Config for Comment.nvim]], false)
+-- Config for: telescope-fzf-native.nvim
+time([[Config for telescope-fzf-native.nvim]], true)
+try_loadstring("\27LJ\2\nÔ\2\0\0\t\0\19\0\0286\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\r\0005\3\4\0005\4\3\0=\4\5\0035\4\n\0005\5\b\0006\6\0\0'\b\6\0B\6\2\0029\6\a\6=\6\t\5=\5\v\4=\4\f\3=\3\14\0025\3\15\0=\3\16\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\17\0'\2\18\0B\0\2\1K\0\1\0\bfzf\19load_extension\fpickers\1\0\1\20layout_strategy\rvertical\rdefaults\1\0\0\rmappings\6i\1\0\0\n<Esc>\1\0\0\nclose\22telescope.actions\25file_ignore_patterns\1\0\0\1\6\0\0\21node%_modules/.*\r%.git/.*\r^dist/.*\14^.next/.*\14^.nuxt/.*\nsetup\14telescope\frequire\0", "config", "telescope-fzf-native.nvim")
+time([[Config for telescope-fzf-native.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
 -- Config for: nvim-ts-autotag
 time([[Config for nvim-ts-autotag]], true)
 try_loadstring("\27LJ\2\n_\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fautotag\1\0\0\1\0\1\venable\2\nsetup\20nvim-ts-autotag\frequire\0", "config", "nvim-ts-autotag")
 time([[Config for nvim-ts-autotag]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n}\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\2B\0\2\1K\0\1\0\28current_line_blame_opts\1\0\1\ndelay\3–\1\1\0\1\23current_line_blame\2\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-treesitter ]]

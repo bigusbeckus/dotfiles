@@ -286,4 +286,7 @@ return require("packer").startup(function(use)
 		"Joakker/lua-json5",
 		run = "./install.sh",
 	})
+
+	-- Github copilot
+	use("github/copilot.vim")
 end)
