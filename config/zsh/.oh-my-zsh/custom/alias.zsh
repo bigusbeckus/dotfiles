@@ -58,6 +58,13 @@ alias pd="pnpm run dev"
 alias pnpr="pnpm run"
 alias prm="pnpm remove"
 
+# bun
+alias bi="bun install"
+alias bid="bun install -D"
+alias bd="bun run dev"
+alias bnpr="bun run"
+alias brm="bun remove"
+
 # yarn
 alias ya="yarn add"
 alias yad="yarn add -d"
