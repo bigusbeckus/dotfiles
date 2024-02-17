@@ -1,4 +1,4 @@
-print("Cleanup file")
+vim.print("Cleanup file")
 local is_nvim_instance_running = function()
 	if vim.fn.exists("nv_ls_nvim") == 1 then
 		return 1

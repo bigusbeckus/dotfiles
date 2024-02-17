@@ -10,4 +10,4 @@ vim.g.neovide_cursor_animate_command_line = true
 vim.g.neovide_cursor_vfx_mode = "sonicboom"
 -- vim.g.neovide_cursor_vfx_mode = "wireframe"
 
-print("Neovide config loaded")
+vim.print("Neovide config loaded")

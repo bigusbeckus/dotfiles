@@ -38,6 +38,9 @@ return require("packer").startup(function(use)
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 
+			-- JSON schema store
+			"b0o/schemastore.nvim",
+
 			-- Autocompletion
 			"hrsh7th/nvim-cmp", -- Required
 			"hrsh7th/cmp-nvim-lsp", -- Required
@@ -114,8 +117,8 @@ return require("packer").startup(function(use)
 	})
 	require("poimandres").setup({
 		bold_vert_spilt = false,
-		disable_background = true,
-		dim_nc_background = true, -- dim the 'non-current' window's background
+		-- disable_background = true,
+		-- dim_nc_background = true, -- dim the 'non-current' window's background
 		disable_italics = false,
 	})
 	-- use({
@@ -178,9 +181,9 @@ return require("packer").startup(function(use)
 	-- nvim-dap UI
 	-- use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 
-	-- null-ls (Formatter/linter)
+	-- none-l, replacement to null-ls (Formatter/linter)
 	use({
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
@@ -287,9 +290,6 @@ return require("packer").startup(function(use)
 	})
 	vim.g.mkdp_echo_preview_url = 1
 	vim.g.mkdp_theme = "dark"
-
-	-- Indent blankline
-	-- use("lukas-reineke/indent-blankline.nvim")
 
 	-- Vim vinegar
 	use("tpope/vim-vinegar")

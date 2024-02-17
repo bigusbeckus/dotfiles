@@ -1,3 +1,33 @@
+function dump(o)
+	if type(o) == "table" then
+		local s = "{ "
+		for k, v in pairs(o) do
+			if type(k) ~= "number" then
+				k = '"' .. k .. '"'
+			end
+			s = s .. "[" .. k .. "] = " .. dump(v) .. ","
+		end
+		return s .. "} "
+	else
+		return tostring(o)
+	end
+end
+
+function dumpJson(o)
+	if type(o) == "table" then
+		local s = "{ "
+		for k, v in pairs(o) do
+			if type(k) ~= "number" then
+				k = '"' .. k .. '"'
+			end
+			s = s .. k .. ": " .. dumpJson(v) .. ","
+		end
+		return s .. "} "
+	else
+		return tostring(o)
+	end
+end
+
 local disable_lsp_syntax_highlight = true
 require("neodev").setup({})
 local mason_registry = require("mason-registry")
@@ -106,85 +136,14 @@ lsp.configure("graphql", {
 -- 	root_dir = root_pattern(".terraform", ".git"),
 -- })
 
--- Setup jsonls with common schemas
+-- Setup json and yaml schema stores
+local schemastore = require("schemastore")
 lsp.configure("jsonls", {
 	filetypes = { "sqq", "json", "jsonc", "tfstate" },
 	settings = {
 		json = {
-			-- Manually configure JSON schemas https://www.schemastore.org
-			schemas = {
-				{
-					description = "Node package.json",
-					fileMatch = { "package.json" },
-					url = "https://json.schemastore.org/package.json",
-				},
-				{
-					description = "Typescript compiler config",
-					fileMatch = { "tsconfig.json", "tsconfig.*.json" },
-					url = "https://json.schemastore.org/tsconfig.json",
-				},
-				{
-					description = "Javascript config",
-					fileMatch = { "jsconfig.json", "jsconfig.*.json" },
-					url = "https://json.schemastore.org/jsconfig.json",
-				},
-				{
-					description = "Prettier config",
-					fileMatch = {
-						".prettierrc",
-						".prettierrc.json",
-						"prettier.config.json",
-					},
-					url = "https://json.schemastore.org/prettierrc.json",
-				},
-				{
-					description = "ESLint config",
-					fileMatch = {
-						".eslintrc",
-						".eslintrc.json",
-					},
-					url = "https://json.schemastore.org/eslintrc.json",
-				},
-				{
-					description = "Babel config",
-					fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
-					url = "https://json.schemastore.org/babelrc.json",
-				},
-				{
-					description = "Lerna config",
-					fileMatch = { "lerna.json" },
-					url = "https://json.schemastore.org/lerna.json",
-				},
-				{
-					description = "Vercel Now config",
-					fileMatch = { "now.json", "vercel.json" },
-					url = "https://json.schemastore.org/now.json",
-				},
-				{
-					description = "Stylelint config",
-					fileMatch = {
-						".stylelintrc",
-						".stylelintrc.json",
-						"stylelint.config.json",
-					},
-					url = "https://json.schemastore.org/stylelintrc.json",
-				},
-				{
-					description = "Turborepo config",
-					fileMatch = { "turbo.json" },
-					url = "https://turbo.build/schema.json",
-				},
-				{
-					description = "Deno config",
-					fileMatch = { "deno.json", "deno.jsonc" },
-					url = "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
-				},
-				{
-					description = "Nodemon config",
-					fileMatch = { "nodemon.json", "nodemon.jsonc" },
-					url = "https://json.schemastore.org/nodemon.json",
-				},
-			},
+			schemas = schemastore.json.schemas(),
+			validate = { enable = true },
 		},
 	},
 })
@@ -193,26 +152,41 @@ lsp.configure("yamlls", {
 	filetypes = { "yaml", "yml" },
 	settings = {
 		yaml = {
-			schemas = {
-				{
-					description = "Docker compose",
-					fileMatch = {
-						"docker-compose.yml",
-						"docker-compose.yaml",
-						"docker-compose*.yml",
-						"docker-compose*.yaml",
-					},
-					url = "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json",
-				},
-				{
-					description = "Code Rabbit",
-					fileMatch = {
-						".coderabbit.yml",
-						".coderabbit.yaml",
-					},
-					url = "https://coderabbit.ai/integrations/coderabbit-overrides.v2.json",
-				},
+			schemaStore = {
+				enable = false,
+				url = "",
 			},
+			schemas = schemastore.yaml.schemas({
+				extra = {
+					{
+						description = "Kubernetes Deployment",
+						name = "kubernetes-deployment",
+						url = "https://kubernetesjsonschema.dev/v1.14.0/deployment-apps-v1.json",
+						fileMatch = {
+							"*deployment.yml",
+							"*deployment.yaml",
+						},
+					},
+					{
+						description = "Kubernetes Service",
+						name = "kubernetes-service",
+						url = "https://kubernetesjsonschema.dev/v1.10.3-standalone/service-v1.json",
+						fileMatch = {
+							"*service.yml",
+							"*service.yaml",
+						},
+					},
+					{
+						description = "Code Rabbit Configuration",
+						name = "coderabbit-config",
+						url = "https://coderabbit.ai/integrations/coderabbit-overrides.v2.json",
+						fileMatch = {
+							".coderabbit.yml",
+							".coderabbit.yaml",
+						},
+					},
+				},
+			}),
 		},
 	},
 })
@@ -318,7 +292,6 @@ lsp.on_attach(function(client, bufnr)
 
 	-- Setup LSP specific keybinds
 	-- local opts = { buffer = bufnr, remap = false }
-
 	vim.keymap.set(
 		"n",
 		"<leader>e",
@@ -366,12 +339,12 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.signature_help,
 		{ buffer = bufnr, remap = false, desc = "Signature [H]elp (Insert mode)" }
 	)
-	vim.keymap.set(
-		"n",
-		"<C-k>",
-		vim.lsp.buf.signature_help,
-		{ buffer = bufnr, remap = false, desc = "[<C-k>] Signature help (Normal mode)" }
-	)
+	-- vim.keymap.set(
+	-- 	"n",
+	-- 	"<C-k>",
+	-- 	vim.lsp.buf.signature_help,
+	-- 	{ buffer = bufnr, remap = false, desc = "[<C-k>] Signature help (Normal mode)" }
+	-- )
 
 	vim.keymap.set(
 		"n",
@@ -386,7 +359,7 @@ lsp.on_attach(function(client, bufnr)
 		{ buffer = bufnr, remap = false, desc = "[W]orkspace folders: [R]emove" }
 	)
 	vim.keymap.set("n", "<leader>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		vim.print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, { buffer = bufnr, remap = false, desc = "[W]orkspace folders: [L]ist" })
 
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, remap = false, desc = "[R]e [N]ame" })
@@ -417,6 +390,30 @@ lsp.on_attach(function(client, bufnr)
 	end
 end)
 
+-- Process typescript errors with pretty-ts-errors
+-- vim.api.nvim_create_autocmd("LspRequest", {
+-- 	callback = function(args)
+-- 		-- local client_id = args.data.client_id
+-- 		-- local client = vim.lsp.get_client_by_id(client_id)
+-- 		-- if not (client.name == "tsserver" or client.name == "denols") then
+-- 		--     print(client.name)
+-- 		-- 	return
+-- 		-- end
+--
+-- 		-- print("typescript woooo")
+-- 		local bufnr = args.buf
+-- 		local request = args.data.request
+-- 		if request.type == "complete" then
+-- 			local data = vim.api.nvim_buf_get_lines(bufnr, 0, -1, true)
+--       print("\n\n")
+-- 			print("requestcomplete")
+--       print("\n")
+-- 			print(dumpJson(args))
+--       print("\n\n")
+-- 		end
+-- 	end,
+-- })
+
 -- Setup lsp-zero
 lsp.setup()
 
@@ -439,6 +436,42 @@ vim.diagnostic.config({
 		prefix = "",
 	},
 })
+
+function initPrettyTSErrors()
+	local namespace = vim.api.nvim_create_namespace("pretty-ts-errors")
+	vim.api.nvim_create_autocmd("DiagnosticChanged", {
+		callback = function(args)
+			local diagnostics = args.data.diagnostics
+			for key, diagnostic in pairs(diagnostics) do
+				if diagnostic.source == "typescript" then
+					local message = "Did you mean `foo`?"
+
+					if diagnostic.namespace == namespace then
+						if diagnostic.message == "" then
+							vim.diagnostic.reset(namespace, diagnostic.bufnr)
+						end
+						if diagnostic.message == message then
+							return
+						end
+					end
+
+					diagnostic.message = message
+					-- vim.diagnostic.reset(diagnostic.namespace, diagnostic.bufnr)
+					vim.diagnostic.set(namespace, diagnostic.bufnr, { diagnostic }, {})
+				end
+			end
+			-- local client = vim.lsp.get_client_by_id(args.data.source)
+			-- if not (client.name == "tsserver" or client.name == "denols") then
+			-- 	print("not ts")
+			-- 	return
+			-- end
+			-- print("ts :)")
+			-- local diagnostic = args.data.diagnostic
+		end,
+	})
+end
+
+-- initPrettyTSErrors()
 
 -- lsp-zero default
 -- {
