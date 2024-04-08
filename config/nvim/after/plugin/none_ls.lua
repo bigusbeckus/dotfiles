@@ -1,3 +1,5 @@
+vim.g.nonels_supress_issue58 = true
+
 local null_ls = require("null-ls")
 
 local eslint_condition = function(utils)
@@ -15,6 +17,15 @@ local deno_condition = function(utils)
 	return utils.root_has_file({
 		"deno.json",
 	})
+end
+
+local prettier_condition = function(utils)
+	local current_buffer = vim.api.nvim_get_current_buf()
+
+	-- local is_yaml = vim.filetype.match({ buf = current_buffer }) == "yaml"
+	local is_vue = vim.filetype.match({ buf = current_buffer }) == "vue"
+
+	return not is_vue
 end
 
 -- local prettier_condition = function(utils)
@@ -48,10 +59,10 @@ null_ls.setup({
 		null_ls.builtins.formatting.markdownlint,
 		-- null_ls.builtins.formatting.prettier,
 		-- null_ls.builtins.formatting.packer,
-		null_ls.builtins.formatting.prettierd,
-		-- null_ls.builtins.formatting.prettierd.with({
-		-- 	condition = prettier_condition,
-		-- }),
+		-- null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.prettierd.with({
+			condition = prettier_condition,
+		}),
 		null_ls.builtins.formatting.shfmt,
 		-- null_ls.builtins.formatting.sql_formatter,
 		null_ls.builtins.formatting.stylua,
@@ -60,7 +71,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.terraform_fmt.with({
 			filetypes = { "terraform", "tf", "terraform-vars", "hcl" },
 		}),
-		null_ls.builtins.formatting.yamlfmt,
+		-- null_ls.builtins.formatting.yamlfmt,
 
 		-- Linters
 		-- null_ls.builtins.diagnostics.bufls,
