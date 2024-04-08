@@ -23,3 +23,7 @@ vim.keymap.set("n", "<leader>/", function()
 		previewer = false,
 	}))
 end, { noremap = true, desc = "[/] Fuzzily search in current buffer" })
+
+-- Git
+vim.keymap.set("n", "<leader>sc", builtin.git_commits, { noremap = true, desc = "[S]earch Git [C]ommits" })
+vim.keymap.set("n", "<leader>ss", builtin.git_stash, { noremap = true, desc = "[S]earch Git [S]tash" })

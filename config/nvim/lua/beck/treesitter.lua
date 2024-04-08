@@ -1,13 +1,13 @@
 local disable_treesitter_highlight = false
-local treesitter_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+-- local treesitter_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
-treesitter_parser_config.templ = {
-	install_info = {
-		url = "https://github.com/vrischmann/tree-sitter-templ.git",
-		files = { "src/parser.c", "src/scanner.c" },
-		branch = "master",
-	},
-}
+-- treesitter_parser_config["templ"] = {
+-- 	install_info = {
+-- 		url = "https://github.com/vrischmann/tree-sitter-templ.git",
+-- 		files = { "src/parser.c", "src/scanner.c" },
+-- 		branch = "master",
+-- 	},
+-- }
 
 require("ts_context_commentstring").setup({})
 vim.g.skip_ts_context_commentstring_module = true
@@ -60,18 +60,20 @@ require("nvim-treesitter.configs").setup({
 		"terraform",
 		"typescript",
 		"vim",
+		"vimdoc",
 		"vue",
 		"yaml",
 	},
 	highlight = {
-		-- enable = true,
-		enable = not disable_treesitter_highlight and function(_, bufnr)
-			return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) <= 100 * 1024
+		enable = true,
+		disable = function(_, bufnr)
+			if disable_treesitter_highlight then
+				return true
+			end
+			local buf_size = vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr))
+			return buf_size > 100 * 1024
 		end,
 		max_file_lines = 10000,
-		-- disable = disable_treesitter_highlight or function(_, bufnr)
-		-- 	return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 100 * 1024
-		-- end,
 		additional_vim_regex_highlighting = false,
 	},
 	indent = {
