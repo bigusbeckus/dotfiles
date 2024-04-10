@@ -1,8 +1,11 @@
 # Questionable life decisions
 # alias fuckyou='git push --force'
 
+# Shell QOL
+# alias lc='wc -l'
+
 # It ain't much but it's honest work
-alias nano='nvim'
+alias nano='vi'
 
 # Quality of life
 alias mkd='f(){ mkdir "$1" && cd "$1" }; f'
@@ -46,6 +49,9 @@ alias t="tmux"
 alias vim="nvim"
 alias vimbegood="docker run -it --rm brandoncc/vim-be-good:latest"
 
+# Git
+alias gg="git log --branches --remotes --tags --graph --pretty='%C(yellow)%h %C(cyan)%cd %Cblue%aN%C(auto)%d %Creset%s' --date=relative"
+
 # Git but weird
 alias git-clear-permission-changes="git diff -p -R --no-ext-diff --no-color | grep -E \"^(diff|(old|new) mode)\" --color=never | git apply"
 
@@ -57,8 +63,9 @@ alias nd="npm run dev"
 
 # pnpm
 alias pi="pnpm install"
-alias pid="pnpm install -D"
+alias pa="pnpm add"
 alias pd="pnpm run dev"
+alias ptd="pnpm tauri dev"
 alias pnpr="pnpm run"
 alias prm="pnpm remove"
 
