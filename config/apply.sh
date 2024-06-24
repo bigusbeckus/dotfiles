@@ -5,6 +5,7 @@ nvim_config_dir=~/.config/nvim
 zsh_config_dir=~/.oh-my-zsh
 git_config_file=~/.gitconfig
 alacritty_config_dir=~/.config/alacritty
+vi_config_file=~/.virc
 zsh_profile_file=~/.zprofile
 
 echo "Warning: This action will COMPLETELY overwrite any existing configs in the following files and folders"
@@ -12,6 +13,7 @@ echo "  ~/.config/alacritty"
 echo "  ~/.config/nvim"
 echo "  ~/.gitconfig"
 echo "  ~/.oh-my-zsh/custom"
+echo "  ~/.virc"
 echo "  ~/.zprofile"
 read -p "Are you sure you want to continue? (y/N) " -n 1 -rs
 echo
@@ -51,6 +53,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 	mkdir -p "$alacritty_config_dir"
 	cp -r alacritty/* "$alacritty_config_dir"
 	echo "Alacritty config files copied."
+
+  # Delete the virc file if it exists
+  if [ -f "$vi_config_file" ]; then
+    rm "$vi_config_file"
+  fi
+  # Copy over the .virc file from the repo
+  cp vi/.virc "$vi_config_file"
 
 	# Delete the .zprofile file if it exists
 	if [ -f "$zsh_profile_file" ]; then

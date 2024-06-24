@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function get_go_latest() {
 	# Version listing logic "borrowed" from gvm source
