@@ -78,6 +78,7 @@ lsp.ensure_installed({
 	"gopls",
 	"gradle_ls",
 	"graphql",
+  "hls",
 	"html",
 	"intelephense",
 	"jsonls",
@@ -250,9 +251,13 @@ lsp.configure("tailwindcss", {
 	root_dir = root_pattern("tailwind.config.*"),
 })
 
+-- Conditioanlly setup dart for flutter development
 if vim.fn.executable("dart") == 1 then
 	lsp.configure("dartls")
 end
+
+-- Setup volar for the umpteenth time :|
+lsp.configure("volar")
 
 -- Language server for qmljs files (kde config)
 lsp.configure("qml_lsp")
@@ -333,12 +338,12 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.type_definition,
 		{ buffer = bufnr, remap = false, desc = "Go to type [D]efinition" }
 	)
-	vim.keymap.set(
-		"i",
-		"<C-h>",
-		vim.lsp.buf.signature_help,
-		{ buffer = bufnr, remap = false, desc = "Signature [H]elp (Insert mode)" }
-	)
+	-- vim.keymap.set(
+	--   "i",
+	--   "<C-h>",
+	--   vim.lsp.buf.signature_help,
+	--   { buffer = bufnr, remap = false, desc = "Signature [H]elp (Insert mode)" }
+	-- )
 	-- vim.keymap.set(
 	-- 	"n",
 	-- 	"<C-k>",

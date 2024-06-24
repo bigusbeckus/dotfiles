@@ -30,11 +30,6 @@ vim.keymap.set("n", "<leader>f", function()
 	})
 end)
 
--- Zen mode
-vim.keymap.set("n", "<leader>zz", function()
-	require("zen-mode").toggle()
-end)
-
 -- Unbound netrw rebind because vim-vinegar is better
 -- Netrw rebind
 -- vim.keymap.set("n", "<leader>pe", vim.cmd.Ex)
@@ -42,3 +37,6 @@ end)
 -- Unbound because autocmd version is better
 -- vim.cmd("cabb help vert help")
 -- vim.cmd("cabb h vert h")
+
+-- Normal Ctrl+Backspace behavior in insert mode
+vim.keymap.set("i", "<C-h>", '<Esc>vb"_da')
