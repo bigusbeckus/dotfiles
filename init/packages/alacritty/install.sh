@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 # Install alacritty from source
 # Instructions: https://github.com/alacritty/alacritty/blob/master/INSTALL.md
