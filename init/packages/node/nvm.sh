@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 source ../utils.sh
+source ./node_utils.sh
 
 function get_nvm_latest() {
 	local ghreleaseurl="https://api.github.com/repos/nvm-sh/nvm/releases/latest"
@@ -49,25 +50,6 @@ function install_nvm() {
 
 function install_node() {
 	nvm install --lts
-}
-
-function install_npm_package() {
-	local package=$1
-
-	# Check if package is already installed
-	if npm ls -g "$package" >/dev/null 2>&1; then
-		echo "Package $package is already installed, skipping..."
-		return 0
-	fi
-
-	# Install package using npm
-	echo "Installing $package..."
-	if ! npm install -g $package; then
-		echo "Failed to install package $package"
-		return 1
-	fi
-
-	return 0
 }
 
 # Install

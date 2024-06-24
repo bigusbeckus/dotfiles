@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
-./nvm.sh
+# ./nvm.sh
 # ./volta.sh
+./fvm.sh
