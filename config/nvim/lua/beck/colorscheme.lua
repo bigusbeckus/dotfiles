@@ -2,14 +2,14 @@
 -- local selected_colorscheme = "catppuccin-frappe"
 -- local selected_colorscheme = "catppuccin-macchiato"
 -- local selected_colorscheme = "catppuccin-mocha"
-local selected_colorscheme = "gruvbox"
+-- local selected_colorscheme = "gruvbox"
 -- local selected_colorscheme = "night-owl"
 -- local selected_colorscheme = "onedark"
 -- local selected_colorscheme = "onedark_dark"
 -- local selected_colorscheme = "onedark_vivid"
 -- local selected_colorscheme = "poimandres"
 -- local selected_colorscheme = "rose-pine"
--- local selected_colorscheme = "tokyonight"
+local selected_colorscheme = "tokyonight"
 -- local selected_colorscheme = "vscode"
 
 local MAX_PRIORITY = 1000

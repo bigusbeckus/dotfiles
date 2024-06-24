@@ -3,28 +3,28 @@ local colorscheme = require("beck.colorscheme")
 
 require("lazy").setup({
 	-- Colorschemes
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	lazy = colorscheme.get_lazy("tokyonight"),
-	-- 	priority = colorscheme.get_priority("tokyonight"),
-	-- 	config = {
-	-- 		transparent = true,
-	-- 		style = "night",
-	-- 		styles = {
-	-- 			-- sidebars = "transparent",
-	-- 			-- floats = "transparent",
-	-- 		},
-	-- 		sidebars = { "qf", "help", "terminal", "packer" },
-	-- 	},
-	-- },
 	{
-		"ellisonleao/gruvbox.nvim",
-		lazy = colorscheme.get_lazy("gruvbox"),
-		priority = colorscheme.get_priority("gruvbox"),
+		"folke/tokyonight.nvim",
+		lazy = colorscheme.get_lazy("tokyonight"),
+		priority = colorscheme.get_priority("tokyonight"),
 		config = {
-			transparent_mode = true,
+			transparent = true,
+			style = "night",
+			styles = {
+				-- sidebars = "transparent",
+				-- floats = "transparent",
+			},
+			sidebars = { "qf", "help", "terminal", "packer" },
 		},
 	},
+	-- {
+	-- 	"ellisonleao/gruvbox.nvim",
+	-- 	lazy = colorscheme.get_lazy("gruvbox"),
+	-- 	priority = colorscheme.get_priority("gruvbox"),
+	-- 	config = {
+	-- 		transparent_mode = true,
+	-- 	},
+	-- },
 	-- {
 	-- 	"rose-pine/neovim",
 	-- 	name = "rose-pine",

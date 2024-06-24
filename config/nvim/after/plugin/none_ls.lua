@@ -56,6 +56,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.deno_fmt.with({
 			condition = deno_condition,
 		}),
+		null_ls.builtins.formatting.fourmolu,
 		null_ls.builtins.formatting.markdownlint,
 		-- null_ls.builtins.formatting.prettier,
 		-- null_ls.builtins.formatting.packer,
@@ -79,6 +80,7 @@ null_ls.setup({
 			condition = eslint_condition,
 		}),
 		-- null_ls.builtins.diagnostics.eslint,
+		-- null_ls.builtins.diagnostics.hlint,
 		null_ls.builtins.diagnostics.jsonlint,
 		null_ls.builtins.diagnostics.misspell,
 		null_ls.builtins.diagnostics.protolint,

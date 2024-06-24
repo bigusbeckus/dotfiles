@@ -78,6 +78,7 @@ lsp.ensure_installed({
 	"gopls",
 	"gradle_ls",
 	"graphql",
+  "hls",
 	"html",
 	"intelephense",
 	"jsonls",

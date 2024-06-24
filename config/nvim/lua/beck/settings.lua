@@ -35,7 +35,6 @@ vim.opt.guicursor = "n-v:block,i-c-ci-cr-r:ver25-hor50"
 -- Enable full color support (I think)
 vim.opt.termguicolors = true
 
-
 -- Disable vim's default syntax highlighting (we'll be using treesitter)
 vim.cmd([[ syntax off ]])
 
@@ -45,6 +44,7 @@ vim.cmd([[
     autocmd!
     autocmd FileType bash syntax enable
     autocmd FileType netrw syntax enable
+    autocmd FileType samba syntax enable
     autocmd FileType sh syntax enable
     autocmd FileType tmux syntax enable
     autocmd FileType zsh syntax enable
