@@ -12,25 +12,26 @@ TERM = "xterm-256color"
 [window]
 startup_mode = "Maximized"
 decorations = "none"
-# opacity = 0.85
-opacity = 0.95
+opacity = 0.85
+# opacity = 0.95
 padding.x = 0
 padding.y = 0
 
 [font]
 # normal.family = "Agave Nerd Font Mono"
-normal.family = "BitstromWera Nerd Font Mono"
+# normal.family = "BitstromWera Nerd Font Mono"
 # normal.family = "ComicShannsMono Nerd Font Mono"
 # normal.family = "EnvyCodeR Nerd Font Mono"
 # normal.family = "FiraCode Nerd Font Mono"
 # normal.family = "GeistMono Nerd Font Mono"
 # normal.family = "Gohufont 11 Nerd Font Mono"
 # normal.family = "IosevkaTerm Nerd Font Mono"
-# normal.family = "JetBrains Mono Nerd Font Mono"
+normal.family = "JetBrains Mono Nerd Font Mono"
 # normal.family = "OpenDyslexicM Nerd Font Mono"
 # normal.family = "ShureTechMono Nerd Font Mono"
 # normal.family = "Terminess Nerd Font Mono"
 # size = 10.0
+# size = 10.5
 size = 11.0
 # size = 11.5
 # size = 12.0
