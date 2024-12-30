@@ -24,21 +24,28 @@ vim.g.maplocalleader = " "
 
 -- Cursor tracker row and column
 vim.opt.cursorline = true
--- vim.opt.cursorcolumn = true
+vim.opt.cursorcolumn = false
 
--- Permanently enable gutters to avoid shifting with lsp-zero icons
+-- Permanently enable gutters to avoid shifting with lsp icons
 vim.opt.signcolumn = "yes"
 
 -- Get underline cursor in some modes (woohooo)
-vim.opt.guicursor = "n-v:block,i-c-ci-cr-r:ver25-hor50"
+-- vim.opt.guicursor = "n-v:block,i-c-ci-cr-r:ver25-hor50"
 
 -- Enable full color support (I think)
 vim.opt.termguicolors = true
 
--- Disable vim's default syntax highlighting (we'll be using treesitter)
-vim.cmd([[ syntax off ]])
+-- Pick colorscheme to be set once required plugins are installed and lazy loaded
+-- Look at filenames under "lua/plugins/colorscheme" for more options
+vim.o.background = "dark"
+vim.g.selected_theme = "tokyonight"
 
--- Autocommand to disable vim's default syntax highlighting for everything except shell scripts
+-- Replace vim's default syntax highlighting with treesitter
+vim.cmd([[ syntax off ]])
+vim.g.prefer_treesitter_highlight = true
+vim.g.max_treesitter_highlight_filesize = 100 * 1024 -- 100 KB
+
+-- Autocommand to explicitly enable vim's default syntax highlighting for shell scripts
 vim.cmd([[
   augroup syntax_highlight
     autocmd!
@@ -52,7 +59,7 @@ vim.cmd([[
   augroup END
 ]])
 
--- Autocommand to move change default help windows to vertical left
+-- Autocommand to move change default help windows to vertical right
 -- Source: https://vi.stackexchange.com/a/4464
 vim.cmd([[
   augroup vertical_help

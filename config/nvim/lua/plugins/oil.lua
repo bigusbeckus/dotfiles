@@ -1,0 +1,25 @@
+return {
+--   "stevearc/oil.nvim",
+--   ---@module 'oil'
+--   ---@tyle oil.SetupOpts
+--   opts = {
+--     columns = {
+--       "icon",
+--     },
+--     view_options = {
+--       show_hidden = true,
+--       case_insensitive = true,
+--     },
+--   },
+--   dependencies = {
+--     {
+--       "echasnovski/mini.icons",
+--       version = "*",
+--       opts = {},
+--     },
+--   },
+--   config = function(_, opts)
+--     require("oil").setup(opts)
+--     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+--   end,
+}

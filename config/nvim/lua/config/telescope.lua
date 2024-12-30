@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>st", builtin.treesitter, { noremap = true, desc = "
 
 vim.keymap.set("n", "<leader><space>", builtin.buffers, { noremap = true })
 vim.keymap.set("n", "<leader>/", function()
-	-- You can pass additional configuration to telescope to change theme, layout, etc.
+	-- You can pass additional configs to telescope to change theme, layout, etc.
 	builtin.current_buffer_fuzzy_find(themes.get_dropdown({
 		winblend = 10,
 		previewer = false,

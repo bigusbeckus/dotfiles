@@ -1,6 +1,3 @@
--- Old Git show mapping
--- vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-
 local function has_git_folder()
 	return vim.fn.isdirectory(".git") == 1
 end
@@ -11,7 +8,7 @@ local function is_git_repo()
 		return true
 	end
 
-	-- Get the current working directory of the vimrc file
+	-- Get the current working directory
 	local cwd = vim.fn.getcwd()
 	local maxDirs = 20
 	local directories = {}
@@ -44,6 +41,9 @@ end
 if is_git_repo() then
 	vim.keymap.set("n", "<leader>gg", function()
 		vim.api.nvim_command([[ vertical Git ]])
-		-- vim.api.nvim_command([[ Git ]])
 	end)
+
+	-- Stolen from ThePrimeagen again
+	vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
+	vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
 end
