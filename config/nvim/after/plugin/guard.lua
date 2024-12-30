@@ -1,31 +1,27 @@
 local ft = require("guard.filetype")
 
 local function prettier_fmt(buf, _, acc)
-  local co = assert(coroutine.running())
-  local handle = vim.system(
-    { "prettierd", vim.api.nvim_buf_get_name(buf) },
-    { stdin = true },
-    function(result)
-      if result.code ~= 0 then
-        -- "returns" the error
-        coroutine.resume(co, result)
-      else
-        -- "returns" the result
-        coroutine.resume(co, result.stdout)
-      end
-    end
-  )
+	local co = assert(coroutine.running())
+	local handle = vim.system({ "prettierd", vim.api.nvim_buf_get_name(buf) }, { stdin = true }, function(result)
+		if result.code ~= 0 then
+			-- "returns" the error
+			coroutine.resume(co, result)
+		else
+			-- "returns" the result
+			coroutine.resume(co, result.stdout)
+		end
+	end)
 
-  handle:write(acc)
-  handle:write(nil)
-  return coroutine.yield()
+	handle:write(acc)
+	handle:write(nil)
+	return coroutine.yield()
 end
 
 local jsonlint = {
-  cmd = "npx",
-  fname = true,
-  args = { "--quiet" },
-  stdin = true,
+	cmd = "npx",
+	fname = true,
+	args = { "--quiet" },
+	stdin = true,
 }
 
 ft("lua"):fmt("lsp"):append("stylua"):lint("selene")
