@@ -5,6 +5,15 @@ local lspconfig_defaults = lsp.util.default_config
 local root_pattern = require("lspconfig").util.root_pattern
 
 require("mason").setup()
+
+-- Add cmp_nvim_lsp capabilities settings to lspconfig
+-- This should be executed before you configure any language server
+lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+  "force",
+  lspconfig_defaults.capabilities,
+  require("cmp_nvim_lsp").default_capabilities()
+)
+
 require("mason-lspconfig").setup({
   ensure_installed = {
     "astro",
@@ -163,14 +172,6 @@ require("mason-lspconfig").setup({
     end,
   },
 })
-
--- Add cmp_nvim_lsp capabilities settings to lspconfig
--- This should be executed before you configure any language server
-lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-  "force",
-  lspconfig_defaults.capabilities,
-  require("cmp_nvim_lsp").default_capabilities()
-)
 
 -- Setup LSP specific keybinds
 vim.api.nvim_create_autocmd("LspAttach", {
