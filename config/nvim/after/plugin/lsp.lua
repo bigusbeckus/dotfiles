@@ -119,6 +119,7 @@ vim.lsp.config("yamlls", {
 })
 
 vim.lsp.config("denols", {
+    workspace_required = true,
     root_markers = { "deno.json", "deno.jsonc" },
 })
 
