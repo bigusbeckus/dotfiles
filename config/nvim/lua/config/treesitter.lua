@@ -67,7 +67,7 @@ require("nvim-treesitter.configs").setup({
 		"yaml",
 	},
 	highlight = {
-		enable = true,
+        enable = true,
 		disable = function(_, bufnr)
 			-- Disable syntax highlighting based on global enable/disable flag
 			if not vim.g.prefer_treesitter_highlight then

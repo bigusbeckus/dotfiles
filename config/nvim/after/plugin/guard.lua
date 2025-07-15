@@ -29,15 +29,15 @@ ft("lua"):fmt("lsp"):append("stylua"):lint("selene")
 -- TODO: Fix comma spearation in guard.nvim
 -- ft("javascript,typescript,javascriptreact,typescriptreact"):fmt({ fn = prettier_fmt }):lint("lsp")
 
-ft("javascript"):fmt({ fn = prettier_fmt }):lint("lsp")
-ft("javascriptreact"):fmt({ fn = prettier_fmt }):lint("lsp")
-ft("javascript.jsx"):fmt({ fn = prettier_fmt }):lint("lsp")
-ft("typescript"):fmt({ fn = prettier_fmt }):lint("lsp")
-ft("typescriptreact"):fmt({ fn = prettier_fmt }):lint("lsp")
-ft("typescript.tsx"):fmt({ fn = prettier_fmt }):lint("lsp")
+ft("javascript"):fmt("prettier"):lint("lsp")
+ft("javascriptreact"):fmt("prettier"):lint("lsp")
+ft("javascript.jsx"):fmt("prettier"):lint("lsp")
+ft("typescript"):fmt("prettier"):lint("lsp")
+ft("typescriptreact"):fmt("prettier"):lint("lsp")
+ft("typescript.tsx"):fmt("prettier"):lint("lsp")
 
-ft("vue"):fmt({ fn = prettier_fmt })
+ft("vue"):fmt("prettier")
 
-ft("json"):fmt({ fn = prettier_fmt }):lint(jsonlint)
+ft("json"):fmt("prettier"):lint(jsonlint)
 
--- TODO: Setup cbfmt for md files
+ft("markdown"):fmt("mdformat")

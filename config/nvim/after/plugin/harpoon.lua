@@ -17,7 +17,7 @@ vim.keymap.set("n", "<C-e>", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
--- Home row bindings (test)
+-- Home row bindings
 vim.keymap.set("n", "<C-j>", function()
 	harpoon:list():select(1)
 end)
@@ -26,9 +26,6 @@ vim.keymap.set("n", "<C-k>", function()
 end)
 vim.keymap.set("n", "<C-l>", function()
 	harpoon:list():select(3)
-end)
-vim.keymap.set("n", "<C-;>", function()
-	harpoon:list():select(4)
 end)
 
 -- Num row bindings
@@ -61,4 +58,3 @@ end)
 vim.keymap.set("n", "<leader>h9", function()
 	harpoon:list():select(9)
 end)
--- vim.keymap.set("n", "<leader>h0", function() harpoon:list():select(0) end)

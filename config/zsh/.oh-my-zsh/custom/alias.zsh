@@ -22,7 +22,7 @@ alias sfr='xdg-open "$((fd . --full-path / --type f | fzf) | sed "s/^$/""/")" &>
 
 # Minikube
 alias kubectl="minikube kubectl --"
-alias mdocker="eval $(minikube docker-env)"
+# alias mdocker="eval $(minikube docker-env)"
 
 # Docker
 alias dps="docker ps"
@@ -93,6 +93,7 @@ alias yhl="yarn hasura:log"
 alias yal="yarn all:log"
 alias ym="yarn migrate"
 alias yhm="yarn hasura:migrate"
+alias ysb="yarn run storybook"
 
 # pnpm (Hasura)
 alias pdn="pnpm down"

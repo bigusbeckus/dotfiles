@@ -2,16 +2,21 @@ vim.g.disable_lsp_syntax_highlight = true
 
 local lsp = require("lspconfig")
 local lspconfig_defaults = lsp.util.default_config
-local root_pattern = require("lspconfig").util.root_pattern
 
 require("mason").setup()
 
 -- Add cmp_nvim_lsp capabilities settings to lspconfig
 -- This should be executed before you configure any language server
-lspconfig_defaults.capabilities =
-	vim.tbl_deep_extend("force", lspconfig_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+	"force",
+	-- lspconfig_defaults.capabilities,
+	vim.lsp.protocol.make_client_capabilities(),
+	require("cmp_nvim_lsp").default_capabilities()
+)
+lspconfig_defaults.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 require("mason-lspconfig").setup({
+	-- Language servers I use across most projects/machines
 	ensure_installed = {
 		"astro",
 		"bashls",
@@ -36,175 +41,196 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"sqlls",
 		"svelte",
-		"tailwindcss",
+		-- "tailwindcss",
 		"taplo",
 		"templ",
 		"terraformls",
-		"ts_ls",
+		-- "ts_ls",
 		"tflint",
 		"vimls",
-		"volar",
+		-- "vue_ls",
 		"yamlls",
 	},
-	handlers = {
-		-- Default handler
-		function(server_name)
-			lsp[server_name].setup({})
-		end,
-
-		-- Custom handlers
-		["eslint"] = function()
-			lsp["eslint"].setup({
-				root_dir = root_pattern(
-					".eslintrc",
-					".eslintrc.js",
-					".eslintrc.json",
-					".eslintrc.cjs",
-					".eslintrc.yml",
-					".eslintrc.yaml"
-				),
-			})
-		end,
-
-		["jsonls"] = function()
-			lsp["jsonls"].setup({
-				filetypes = { "sqq", "json", "jsonc", "tfstate" },
-				settings = {
-					json = {
-						schemas = require("schemastore").json.schemas(),
-						validate = { enable = true },
-					},
-				},
-			})
-		end,
-
-		["yamlls"] = function()
-			lsp["yamlls"].setup({
-				filetypes = { "yaml", "yml" },
-				settings = {
-					yaml = {
-						schemaStore = {
-							enable = false,
-							url = "",
-						},
-						schemas = require("schemastore").yaml.schemas({
-							extra = {
-								{
-									description = "Kubernetes Deployment",
-									name = "kubernetes-deployment",
-									url = "https://kubernetesjsonschema.dev/v1.14.0/deployment-apps-v1.json",
-									fileMatch = {
-										"*deployment.yml",
-										"*deployment.yaml",
-									},
-								},
-								{
-									description = "Kubernetes Service",
-									name = "kubernetes-service",
-									url = "https://kubernetesjsonschema.dev/v1.10.3-standalone/service-v1.json",
-									fileMatch = {
-										"*service.yml",
-										"*service.yaml",
-									},
-								},
-								{
-									description = "Code Rabbit Configuration",
-									name = "coderabbit-config",
-									url = "https://coderabbit.ai/integrations/coderabbit-overrides.v2.json",
-									fileMatch = {
-										".coderabbit.yml",
-										".coderabbit.yaml",
-									},
-								},
-							},
-						}),
-					},
-				},
-			})
-		end,
-
-		["denols"] = function()
-			lsp["denols"].setup({
-				root_dir = root_pattern("deno.json", "deno.jsonc"),
-			})
-		end,
-
-		["tailwindcss"] = function()
-			lsp["tailwindcss"].setup({
-				root_dir = root_pattern("tailwind.config.*"),
-			})
-		end,
-
-		["volar"] = function()
-			lsp["volar"].setup({})
-		end,
-
-		["ts_ls"] = function()
-			local vue_typescript_plugin = require("mason-registry")
-				.get_package("vue-language-server")
-				:get_install_path() .. "/node_modules/@vue/language-server" .. "/node_modules/@vue/typescript-plugin"
-
-			lsp["ts_ls"].setup({
-				init_options = {
-					plugins = {
-						{
-							name = "@vue/typescript-plugin",
-							location = vue_typescript_plugin,
-							languages = { "javascript", "typescript", "vue" },
-						},
-					},
-				},
-				filetypes = {
-					"javascript",
-					"javascriptreact",
-					"javascript.jsx",
-					"typescript",
-					"typescriptreact",
-					"typescript.tsx",
-					"vue",
-				},
-			})
-		end,
-	},
 })
+
+-- Custom handlers
+vim.lsp.config("eslint", {
+    root_markers = {
+        ".eslintrc",
+        ".eslintrc.js",
+        ".eslintrc.json",
+        ".eslintrc.cjs",
+        ".eslintrc.yml",
+        ".eslintrc.yaml"
+    },
+})
+
+vim.lsp.config("jsonls", {
+    filetypes = { "sqq", "json", "jsonc", "tfstate" },
+    settings = {
+        json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+        },
+    },
+})
+
+vim.lsp.config("yamlls", {
+    filetypes = { "yaml", "yml" },
+    settings = {
+        yaml = {
+            schemaStore = {
+                enable = false,
+                url = "",
+            },
+            schemas = require("schemastore").yaml.schemas({
+                extra = {
+                    {
+                        description = "Kubernetes Deployment",
+                        name = "kubernetes-deployment",
+                        url = "https://kubernetesjsonschema.dev/v1.14.0/deployment-apps-v1.json",
+                        fileMatch = {
+                            "*deployment.yml",
+                            "*deployment.yaml",
+                        },
+                    },
+                    {
+                        description = "Kubernetes Service",
+                        name = "kubernetes-service",
+                        url = "https://kubernetesjsonschema.dev/v1.10.3-standalone/service-v1.json",
+                        fileMatch = {
+                            "*service.yml",
+                            "*service.yaml",
+                        },
+                    },
+                    {
+                        description = "Code Rabbit Configuration",
+                        name = "coderabbit-config",
+                        url = "https://coderabbit.ai/integrations/coderabbit-overrides.v2.json",
+                        fileMatch = {
+                            ".coderabbit.yml",
+                            ".coderabbit.yaml",
+                        },
+                    },
+                },
+            }),
+        },
+    },
+})
+
+vim.lsp.config("denols", {
+    root_markers = { "deno.json", "deno.jsonc" },
+})
+
+-- vim.lsp.config("tailwindcss", {
+--     root_markers = { "tailwind.config.*" },
+-- })
+
+-- local vue_typescript_plugin = require("mason-registry")
+--     .get_package("vue-language-server")
+--     :get_install_path() .. "/node_modules/@vue/language-server" .. "/node_modules/@vue/typescript-plugin"
+
+-- vim.lsp.config("ts_ls", {
+--     init_options = {
+--         plugins = {
+--             {
+--                 name = "@vue/typescript-plugin",
+--                 location = vue_typescript_plugin,
+--                 languages = { "javascript", "typescript", "vue" },
+--             },
+--         },
+--     },
+--     root_markers = { "package.json", "vue.json" },
+--     filetypes = {
+--         "javascript",
+--         "javascriptreact",
+--         "javascript.jsx",
+--         "typescript",
+--         "typescriptreact",
+--         "typescript.tsx",
+--         "vue",
+--     },
+-- })
+
+local bun_servers = {
+	["ts_ls"] = {
+		init_options = {
+			plugins = {
+				{
+					name = "@vue/typescript-plugin",
+					location = vim.fn.expand("~/.bun/install/global/node_modules/@vue/typescript-plugin"),
+					languages = { "javascript", "typescript", "vue" },
+				},
+			},
+		},
+		filetypes = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+			"vue",
+		},
+	},
+	["tailwindcss"] = {
+		root_markers = { "tailwind.config.*" },
+	},
+	["vue_ls"] = {
+		filetypes = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+			"vue",
+		},
+		init_options = {
+			typescript = {
+				tsdk = vim.fn.expand("~/.bun/install/global/node_modules/typescript/lib"),
+			},
+		},
+	},
+}
+for k, v in pairs(bun_servers) do
+	v.capabilities = lspconfig_defaults.capabilities
+	v.flags = {
+		debounce_text_changes = 500,
+	}
+    vim.lsp.enable(k)
+    vim.lsp.config(k, v)
+end
 
 -- Setup LSP specific keybinds
 vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "LSP actions",
-	callback = function(event)
-		local bufnr = event.buf
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- client.server_capabilities.documentHighlightProvider = false
+		-- client.server_capabilities.colorProvider = false
+		client.server_capabilities.semanticTokensProvider = false
 
-		local active_clients = vim.lsp.get_active_clients()
-		local client = active_clients[event.data.client_id]
-
-		local client_exists = client ~= nil
-
-		if client_exists then
-			-- Disable LSP syntax highlighting (we're using treesitter instead)
-			-- TODO: Fix this. It keeps causing problems
-			-- local semantic_tokens_provider_exists = client_exists and type(client.server_capabilities) == "table" and client.server_capabilities.semanticTokensProvider ~= nil
-			-- if vim.g.disable_lsp_syntax_highlight and semantic_tokens_provider_exists then
-			--   client.server_capabilities.semanticTokensProvider = nil
-			-- end
-
-			-- ts_ls - denols conflict resolution
-			if client.name == "denols" then
-				for _, client_ in pairs(active_clients) do
-					-- Stop tsserver if denols is already active
-					if client_.name == "ts_ls" then
-						client_.stop()
-					end
+		-- ts_ls - denols conflict resolution
+		local clients = vim.lsp.get_clients()
+		if client.name == "denols" then
+			for _, client_ in pairs(clients) do
+				-- Stop tsserver if denols is already active
+				if client_.name == "ts_ls" then
+					client_.stop()
 				end
-			elseif client.name == "ts_ls" then
-				for _, client_ in pairs(active_clients) do
-					-- Prevent tsserver from running if denols is already active
-					if client_.name == "denols" then
-						client.stop()
-					end
+			end
+		elseif client.name == "ts_ls" then
+			for _, client_ in pairs(clients) do
+				-- Prevent tsserver from running if denols is already active
+				if client_.name == "denols" then
+					client.stop()
 				end
 			end
 		end
 
+        -- Setup keybinds
+		local bufnr = args.buf
 		vim.keymap.set(
 			"n",
 			"<leader>e",
@@ -291,7 +317,8 @@ local cmp = require("cmp")
 cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
+		{ name = "path" },
+		-- { name = "luasnip" },
 		{ name = "buffer" },
 		-- more sources
 		{ name = "nvim-lua" },

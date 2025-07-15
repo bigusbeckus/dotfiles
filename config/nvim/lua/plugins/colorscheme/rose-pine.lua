@@ -7,6 +7,7 @@ return {
 		variant = "moon",
 		-- dark_variant = "moon",
 		styles = {
+            italic = false,
 			transparency = true,
 		},
 	},

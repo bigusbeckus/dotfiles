@@ -6,6 +6,4 @@ return {
 
 	-- Vim config QOL
 	"tpope/vim-scriptease",
-
-	-- "github/copilot.vim", -- Github copilot
 }
