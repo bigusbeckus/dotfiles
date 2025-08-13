@@ -7,3 +7,6 @@
   ```sh
   sudo sysctl fs.inotify.max_user_instances=256
   ```
+
+- [ ] Auto install org.freedesktop.Platform.GL.nvidia-xxx-xx-xx from flathub where appropriate
+        > Hardware decoding for stuff like jellyfin is broken without it

@@ -9,3 +9,4 @@
 3. Copy over the `KWIN_DRM_DEVICES` environment variable from `environment` in this directory to `/etc/environment`
    > You may have to modify the `pci-xxxx\:xx\:xx.x-card` bits with the appropriate values for your device.
    > Run `lspci | egrep VGA` to list installed PCI graphics cards
+4. Install `envycontrol` to switch between integrated, hybrid, and nvidia graphics modes
